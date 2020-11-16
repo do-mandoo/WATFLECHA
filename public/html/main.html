@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WATFLICHA</title>
+    <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <h1 class="header__logo">
+          <img src="./img/WATFLICHA-logo.png" alt="WATFLICHA 로고" />
+        </h1>
+        <nav class="header__nav">
+          <ul>
+            <li id="bookmark">
+              <a href="#">
+                <i class="fas fa-heart"></i>
+              </a>
+            </li>
+            <li id="search">
+              <i class="fas fa-search"></i>
+              <form>
+                <input
+                  type="text"
+                  id="search-bar"
+                  placeholder="검색할 영화 입력하세요"
+                  class="hide"
+                />
+              </form>
+            </li>
+            <li id="logout">
+              <a href="#" class="logout-btn">
+                로그아웃
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main class="main">
+        <ul class="genre-list">
+          <li>액션</li>
+          <li>애니메이션</li>
+          <li>로맨스</li>
+          <li>스릴러</li>
+          <li>SF</li>
+        </ul>
+        <section class="top10">
+          <h2>TOP 10</h2>
+          <ul class="top10-list"></ul>
+        </section>
+        </ul>
+        <section class="newest">
+          <h2>최신 영화</h2>
+          <ul class="newest-list"></ul>
+        </section>
+        </ul>
+        <section class="favorite">
+          <h2>취향 저격 영화</h2>
+          <ul class="favorite-list"></ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
