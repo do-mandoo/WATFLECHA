@@ -1,0 +1,71 @@
+@import url(/public/css/reset.css);
+
+.container{
+  background: url(../image/login-bg-image.jpg) no-repeat;
+  width: 100%;
+  height: 1000px;
+}
+
+.login-box{
+  background-color:#000;
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 60px;
+}
+
+h1{
+  color: #fff;
+  font-size: 40px;
+}
+
+form{
+  display: flex;
+  flex-flow: column wrap;
+  padding-top: 30px;
+}
+
+input{
+  margin-bottom: 20px;
+  padding: 10px 8px;
+  border-radius: 5px;
+  background-color: #aaa;
+}
+input:hover{
+  caret-color: #fff;
+  background-color:#800000;
+}
+
+input[type=submit]:hover{
+  cursor: pointer;
+  background-color: #ff4500;
+  text-decoration: underline;
+}
+
+.login-button{
+  background-color:#e50914;
+  color: #fff;
+  font-size: large;
+  border-radius: 8px;
+  border: none;
+}
+
+.form-bottom{
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-remember>input[type=checkbox]{
+  margin: 0;
+  padding: 0;
+}
+
+.login-help-link{
+  display: inline-block;
+}
+.login-help-link:hover{
+  text-decoration: underline;
+}
+
