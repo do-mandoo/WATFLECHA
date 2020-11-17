@@ -77,10 +77,18 @@ a{
   border-radius: 4px;
   border: 0;
   background: #333;
+  color: #ffffff;
 }
 .signUp-content:hover{
   background-color: #800000;
   caret-color: 	#ffffff;
+}
+.errorColor{
+  background-color: #800000;
+}
+.alert{
+  padding-left: 10px;
+  color: red;
 }
 .signUp-bt{
   display: block;
