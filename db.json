@@ -1,19 +1,18 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
+      "id" : "Alex123",
+      "name": "Alex",
+      "pw": "123",
+      "genre": "SF",
+      "bookmarks": ["531219","726739", "413518", "524047", "718444", "652004"]
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id" : "luna123",
+      "name": "luna",
+      "pw": "1212",
+      "genre": "애니메이션",
+      "bookmarks": ["531219","726739", "413518", "524047", "718444", "652004"]
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
