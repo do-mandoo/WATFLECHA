@@ -47,24 +47,38 @@ a{
   width:175px;
   height: 55px;
   filter: blur(0px);
+  margin-top: 20px;
+  margin-left: 20px;
 }
-.signUp{
-  margin: 0 auto;
+.modiIf{
+  position: absolute;
+  top: 25px;
+  left: 550px;
   background-color: rgb(9 7 7);
   display: flex;
   flex-direction: column;
   padding: 60px 68px 40px 68px;
   width: 450px;
   /* height: 500px; */
+  border-radius: 15px;
+}
+.modi-bt{
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+  height: 40px;
+  font-size: 15px;
   border-radius: 4px;
 }
-.signUp > h2 {
+.modi-bt:hover{
+  background-color: grey;
+}
+.modiIf > h2 {
   font-size: 32px;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 20px;
 }
-.signUp-content{
+.modiIf-content{
   width: 100%;
   margin: 10px 0;
   height: 50px;
@@ -74,7 +88,7 @@ a{
   background: #333;
   color: #ffffff;
 }
-.signUp-content:hover{
+.modiIf-content:hover{
   background-color: #800000;
   caret-color: 	#ffffff;
 }
@@ -85,9 +99,9 @@ a{
   padding-left: 10px;
   color: red;
 }
-.signUp-bt{
-  display: block;
-  width: 100%;
+.modiIf-bt{
+  display: inline-block;
+  width: 47%;
   height: 50px;
   font-size: 16px;  
   color: #ffffff;
@@ -97,7 +111,7 @@ a{
   margin-top: 16px;
   cursor: pointer;
 }
-.signUp-bt:hover{
+.modiIf-bt:hover{
   background: #ff4500;
   text-decoration: underline;
 }
@@ -108,4 +122,22 @@ a{
   padding: 15px; /* 여백으로 높이 설정 */
   border: 1px solid #999;
   border-radius: 4px;
+}
+.completedMessage{
+  margin-top: 15px;
+}
+.message{
+  color: white;
+  margin-top: 10px;
+  opacity: 0.8;
+  padding-left: 0;
+  display: none;
+}
+.bt{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.active{
+  display: block;
 }
