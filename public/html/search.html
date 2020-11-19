@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>찜한 콘텐츠 | WHATFLECHA</title>
 
-
   <!-- css link -->
-  <link rel="stylesheet" href="../css/bookmark.css" />
+  <link rel="stylesheet" href="../css/search.css" />
 
   <!-- js link -->
-  <script defer src="../js/bookmark.js"></script>
-
+  <script defer src="../js/search.js"></script>
 
   <link
       rel="stylesheet"
@@ -47,22 +45,30 @@
             </form>
           </li>
           <li class="header__nav__logout">
-            <a href="/" class="logout-btn">로그아웃</a>
+            <a href="./login.html" class="logout-btn">로그아웃</a>
           </li>
         </ul>
       </nav>
     </header>
     <section class="main">
-      <h1><span class="main__name"></span>님이 찜한 콘텐츠</h1>
-      <div class="main__container">
-        <ul class="main__container__movies">
-          <!-- <li class='${id}'>
-            <a href="#">
-              <img src=""></img>
-              title
-            </a>
-          </li> -->
-        </ul>
+      <h1><span class="main__name"></span>님이 검색한 콘텐츠</h1>
+      <div class="search">
+        <form class="search-form">
+          <input type="text" id="search-bar2" class="search-bar" placeholder="검색할 영화를 입력하세요" >
+          <!-- <input type="submit"> -->
+          <button class="fas fa-search search-btn" type="submit"><span>찾기</span></button>
+        </form>
+      </div>
+      <div class="result">
+        <ul class="result_movies">
+          <!-- <li>
+            <a>
+                <img>
+                title
+              </a>
+            </li> -->
+          </ul>
+        </div>
       </div>
       <div class="popup">
         <button class="close-btn">X</button>
@@ -88,7 +94,7 @@
           </ul>
         </div>
       </div>
-      <button class="top-btn">맨 위로</button>
+      <button class="top-btn">더보기</button>
     </section>
     <div class="overlay"></div>
     <div class="heartPopup"><img src="../image/heart.png" /></div>
