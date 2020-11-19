@@ -1,14 +1,20 @@
 @import url(./reset.css);
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-
+html,
+body {
+  height: 100%;
+}
 body {
   background: black;
   color: #fff;
   font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
 }
 .header {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding: 20px 0;
 }
@@ -24,12 +30,14 @@ body {
 .header__nav {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translate(0, -50%);
+  top: 15%;
 }
 .header__nav li {
-  display: inline-block;
-  margin: 0 20px 0 0;
+  float: left;
+  margin: 10px 22px 0 0;
+}
+.header__nav li:first-child {
+  transform: translate(0, 2px);
 }
 .header__nav li:first-child i {
   color: crimson;
@@ -37,28 +45,314 @@ body {
 .header__nav li form {
   display: inline-block;
 }
-.header__nav li form input.hide {
-  width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
+.header__nav #search {
+  width: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s;
 }
-.logout-btn {
-  text-decoration: none;
+.header__nav #search input {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px 2px 0 2px;
+  outline: none;
+}
+.header__nav #search:hover {
+  width: 202px;
+}
+a.logout-btn {
+  font-size: 14px;
   color: #fff;
+  text-decoration: none;
+  line-height: 25px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+a.logout-btn:hover {
+  background-color: crimson;
+  border: 2px solid crimson;
 }
 .genre-list {
-  margin-bottom: 40px;
+  width: 100%;
+  margin: 10px 0 0 0;
 }
 .genre-list li {
   display: inline-block;
   width: 19.5%;
   padding: 10px;
   text-align: center;
+  transition: background 0.5s;
+  border-radius: 4px;
+}
+.genre-list li a {
+  display: block;
+}
+.genre-list li:hover {
+  background: crimson;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  margin-top: -164px;
+  z-index: -1;
+  opacity: 0.6;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
 }
 .main section {
   margin-bottom: 20px;
 }
-.main section h2 {
-  margin-bottom: 30px;
+.main #top_rated h2 {
+  margin-bottom: 20px;
+}
+/* main */
+.main {
+  margin-top: -150px;
+  padding: 0 100px;
+}
+.main section {
+  position: relative;
+}
+.main section div {
+  padding: 20px 0;
+  overflow: hidden;
+}
+.main section ul {
+  transform: translateX(0);
+}
+.main section ul li {
+  float: left;
+  position: relative;
+  list-style-type: none;
+  text-align: center;
+  font-size: 15px;
+  line-height: 50px;
+  transition: all 0.3s ease-in-out;
+}
+.main section ul li:hover {
+  transform: scale(1.2);
+  z-index: 1;
+  background-color: #000;
+}
+.main section ul li span {
+  position: absolute;
+  font-size: 82px;
+  left: -10px;
+  top: -15px;
+  opacity: 0.9;
+}
+.main section ul li a {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+.main section ul li img {
+  display: block;
+  width: 100%;
+  max-height: 350px;
+}
+.main section ul li:hover {
+  cursor: pointer;
+}
+
+.main section button {
+  position: absolute;
+  top: 48%;
+  color: #fff;
+  font-size: 30px;
+  outline: none;
+}
+.main section .prev {
+  left: -20px;
+}
+.main section .next {
+  right: -20px;
+}
+/* popup-UI */
+
+.overlay {
+  display: none;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup {
+  display: none;
+  z-index: 200;
+  background-color: rgb(36, 36, 36);
+  width: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: ease-in 1s;
+  border-radius: 10px;
+}
+
+.close-btn {
+  color: #fff;
+  position: absolute;
+  right: 8px;
+  top: -50px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 25px;
+  z-index: 100;
+}
+
+.popup__video {
+  background-color: rgb(27, 27, 27);
+  height: 350px;
+  overflow: hidden;
+}
+
+.popup::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.popup__defalt {
+  position: relative;
+}
+
+h3.popup__movieName {
+  /* display: inline-block; */
+  font-size: 2rem;
+  line-height: 6rem;
+}
+
+.vote-data {
+  margin-right: 20px;
+}
+
+.like-btn {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.liked {
+  cursor: pointer;
+  color: crimson;
+}
+
+.heartPopup {
+  display: none;
+  opacity: 0;
+  z-index: -300;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s;
+}
+
+.heartPopup img {
+  max-width: 600px;
+}
+
+.popup__defalt .like-btn span {
+  font-size: 16px;
+}
+
+.open-btn {
+  color: #fff;
+  position: absolute;
+  right: 5px;
+  top: 60px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 30px;
+}
+
+.fa-chevron-down {
+  transition: ease-in 0.3s;
+}
+
+.active {
+  transform: rotate(180deg);
+}
+
+.popup__defalt {
+  padding: 10px 40px;
+}
+
+.popup__open {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+  margin: 0 40px 20px;
+}
+
+.popup__open::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.popup__open__overviewAll {
+  float: left;
+  width: 70%;
+  padding: 15px 0;
+}
+
+h3.popup__open__overviewTag {
+  line-height: 5rem;
+}
+
+.popup__open__overview {
+  padding-bottom: 10px;
+}
+
+.popup__open__details {
+  float: right;
+  width: 25%;
+  margin-top: 50px;
+}
+
+.top-btn {
+  margin: 50px auto;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: transparent;
+  width: 200px;
+  height: 70px;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 2rem;
+  /* padding: 15px 20px; */
+  text-decoration: none;
+  outline: none;
+}
+
+.top-btn:hover {
+  background-color: crimson;
+  border: 2px solid crimson;
 }

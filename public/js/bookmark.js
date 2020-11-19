@@ -58,6 +58,7 @@ $closeBtn.onclick = async e => {
   
 
   // liked 유무에 따른 데이터 db에 반영
+
   if (!$likeBtn.classList.contains('liked')){
     try {
       const removedNewBookmarks = oldbookmarks.filter(bookmark => bookmark !== selectedId);
@@ -86,6 +87,7 @@ $closeBtn.onclick = async e => {
 }
 
 // overlay 클릭 이벤트
+
 $overlay.onclick = async () => {
   $popup.style.display = 'none';
   document.querySelector('.overlay').style.display = 'none';
@@ -178,10 +180,12 @@ $main__container__movies.onclick = async e => {
     // const {title, vote_average, overview, release_date, genres, runtime} = await resMovie.json();
     const movie = await resMovie.json();
 
+
     // 배우 API
     const resActors = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}/credits?api_key=${api_key}&language=ko`)
     const mainActors = await resActors.json();
     const actors = mainActors.cast.slice(0,4).map(actor => actor.name).join(', ');
+
     popup(movie, actors);
 
     // 예고편 youtube API
@@ -224,6 +228,7 @@ const render = (userName, results) => {
 //     title
 //   </a>
 // </li>
+
 
 (async () => {
   try {
