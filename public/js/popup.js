@@ -17,7 +17,7 @@ const $heartPopup = document.querySelector(".heartPopup");
 let selectedId;
 
 const popup = (movie, actors) => {
-  $popup__movieName.innerHTML = movie.title;
+  if (selectedId) $popup__movieName.innerHTML = movie.title;
   $vote.innerHTML =
     movie.vote_average !== 0 ? `${movie.vote_average} / 10` : "집계중";
   $overview.innerHTML = movie.overview;
@@ -25,6 +25,7 @@ const popup = (movie, actors) => {
   $genre.innerHTML = movie.genres[0].name;
   $runtime.innerHTML = movie.runtime;
   $actors.innerHTML = actors;
+  if (getBookmarks.indexOf(selectedId) !== -1) $likeBtn.classList.add("liked");
 };
 
 $openBtn.onclick = () => {
@@ -41,8 +42,6 @@ $main__container__movies.onclick = async (e) => {
   selectedId = e.target.parentNode.parentNode.id;
   $popup.style.display = "block";
   $overlay.style.display = "block";
-  // $likeBtn.classList.add("liked");
-
   try {
     // 영화 API로 popup창 개별 정보 가져오기
     const resMovie = await fetch(
@@ -60,7 +59,6 @@ $main__container__movies.onclick = async (e) => {
       .join(", ");
 
     popup(movie, actors);
-
     const resVideo = await fetch(
       `https://api.themoviedb.org/3/movie/${selectedId}/videos?api_key=${key}`
     );
@@ -71,7 +69,7 @@ $main__container__movies.onclick = async (e) => {
   }
 };
 
-$likeBtn.onclick = (e) => {
+$likeBtn.onclick = async (e) => {
   $likeBtn.classList.toggle("liked");
 
   if ($likeBtn.classList.contains("liked")) {
@@ -86,7 +84,7 @@ $likeBtn.onclick = (e) => {
       $heartPopup.style.display = "none";
       $heartPopup.style.transition = "none";
       $heartPopup.style.zIndex = "-300";
-    }, 1000)();
+    }, 1000);
   } else {
     $likeBtn.firstElementChild.innerHTML = "찜하기";
   }
@@ -100,30 +98,31 @@ $closeBtn.onclick = async (e) => {
   $popupOpen.style.height = 0;
   $likeBtn.firstElementChild.innerHTML = "찜완료!";
 
-  if (!$likeBtn.classList.contains("liked")) {
-    try {
-      const removedNewBookmarks = oldbookmarks.filter(
-        (bookmark) => bookmark !== selectedId
-      );
-      // await fetch(`/users/${user.id}`, {
-      //   method: "PATCH",
-      //   headers: { "content-type": "application/json" },
-      //   body: JSON.stringify({ bookmarks: removedNewBookmarks }),
-      // });
-    } catch (err) {
-      console.log("[ERROR]", err);
-    }
-  } else {
-    try {
-      if (oldbookmarks.indexOf(selectedId) !== -1) return;
-      const addedNewBookmarks = oldbookmarks.concat(selectedId);
-      // await fetch(`/users/${user.id}`, {
-      //   method: "PATCH",
-      //   headers: { "content-type": "application/json" },
-      //   body: JSON.stringify({ bookmarks: addedNewBookmarks }),
-      // });
-    } catch (err) {
-      console.log("[ERROR]", err);
-    }
+  const patchBookmarks = $likeBtn.classList.contains("liked")
+    ? getBookmarks
+        .filter((movieId) => movieId !== selectedId)
+        .concat(selectedId)
+    : getBookmarks.filter((movieId) => movieId !== selectedId);
+  console.log(patchBookmarks);
+  try {
+    const patchLi = await fetch(`/users/${localUser.id}`, {
+      method: "PATCH",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify({
+        bookmarks: patchBookmarks,
+      }),
+    });
+    const { bookmarks } = await patchLi.json();
+    getBookmarks = bookmarks;
+  } catch (err) {
+    console.log("[ERROR]", err);
   }
+  $likeBtn.classList.remove("liked");
+};
+
+$overlay.onclick = async () => {
+  $popup.style.display = "none";
+  document.querySelector(".overlay").style.display = "none";
+  document.querySelector(".fa-chevron-down").classList.remove("active");
+  $popupOpen.style.height = 0;
 };
