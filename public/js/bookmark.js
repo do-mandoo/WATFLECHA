@@ -22,8 +22,16 @@ const $header__logo = document.querySelector('.header__logo');
 const $heartPopup = document.querySelector('.heartPopup');
 let selectedId;
 
-//event handler
+// local storage => 최종때 꼭 지워주세요!!!!!!!!!!!!!!!!!!
+// localStorage.setItem('login', 
+//   JSON.stringify({
+//     id: 'Alex123', 
+//     name: 'Alex',
+//     genre: 'SF'
+//   }));
+// let user = JSON.parse(localStorage.getItem('login'));
 
+//event handler
 $search.onclick = () => {
   if ($search.parentNode.parentNode.style.width !== '202px') {
     $search.parentNode.parentNode.style.width = '202px'
@@ -132,15 +140,6 @@ $topBtn.onclick = () => {
   });
 }
 
-// local storage
-localStorage.setItem('login', 
-  JSON.stringify({
-    id: 'Alex123', 
-    name: 'Alex',
-    genre: 'SF'
-  }));
-let user = JSON.parse(localStorage.getItem('login'));
-
 // popup에서 하트 클릭시 toggle
 $likeBtn.onclick = e => {
   $likeBtn.classList.toggle('liked');
@@ -177,6 +176,7 @@ $main__container__movies.onclick = async e => {
     const resMovie = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}?api_key=${api_key}&language=ko`);
     // const {title, vote_average, overview, release_date, genres, runtime} = await resMovie.json();
     const movie = await resMovie.json();
+    console.log(movie);
 
     // 배우 API
     const resActors = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}/credits?api_key=${api_key}&language=ko`)
@@ -243,3 +243,4 @@ const render = (userName, results) => {
     console.log('[ERROR]', err);
   }
 })();
+
