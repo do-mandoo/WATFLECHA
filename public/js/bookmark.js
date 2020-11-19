@@ -133,12 +133,12 @@ $topBtn.onclick = () => {
 }
 
 // local storage
-localStorage.setItem('login', 
-  JSON.stringify({
-    id: 'Alex123', 
-    name: 'Alex',
-    genre: 'SF'
-  }));
+// localStorage.setItem('login', 
+//   JSON.stringify({
+//     id: 'Alex123', 
+//     name: 'Alex',
+//     genre: 'SF'
+//   }));
 let user = JSON.parse(localStorage.getItem('login'));
 
 // popup에서 하트 클릭시 toggle
