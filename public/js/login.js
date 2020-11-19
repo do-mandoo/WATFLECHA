@@ -12,6 +12,7 @@ const $signUpGo = document.querySelector('.sign-up-go');
 const $errorMessage = document.querySelectorAll('.error-message');
 
 let saveLogin;
+
 //보낼때, 아이디랑 비밀번호 중복되는지,
 $loginButton.onclick = async () => {
   try {
@@ -61,7 +62,7 @@ $loginButton.onclick = async () => {
     }));
 
     localUser = JSON.parse(localStorage.getItem('login'));
-    window.location.href="http://localhost:3000/html/main.html"
+    // window.location.href="http://localhost:3000/html/main.html"
   }catch(err) {
     console.error('[ERROR~!]', err);
   }
@@ -78,3 +79,4 @@ window.onload = () => {
     $loginId.value = localUser.id;
   }
 }
+
