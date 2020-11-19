@@ -1,3 +1,7 @@
+// 만약 로그인안한 상태로 페이지에 접근할 경우
+// 로컬스토리지에 찾으려는 값이 없는경우 null이 반환된다.
+if(!localStorage.getItem('login')) window.location.href = '/';
+
 const $modiIfBt = document.querySelector('.modiIf-bt');
 const $modiIfName = document.querySelector('.modiIf-name');
 const $modiIfId = document.querySelector('.modiIf-id');
@@ -11,17 +15,6 @@ const $completedMessage = document.querySelector('.completedMessage');
 const $modiBt = document.querySelectorAll('.modi-bt');
 const $cancle = document.querySelector('.cancle');
 const $message = document.querySelector('.message');
-console.log($message);
-
-// 가상으로 로컬스토리지에 저장하려고 한값이므로
-  // ******지워주기******
-localStorage.setItem('login', 
-  JSON.stringify({
-    id: 'Alex123', 
-    name: 'Alex', 
-    genre: 'SF', 
-    bookmarks: ["726739", "718444", "524047", "531219", "652004", "413518"]
-}));
 
 // 로컬스토리지에 데이터를 쌓이게 해준다.
 let user = JSON.parse(localStorage.getItem('login'));
@@ -150,11 +143,13 @@ $modiIfBt.onclick = async e => {
   $completedMessage.textContent = '수정이 완료되었습니다.'
 };
 
-// 취소하기 버튼 클릭스 메인으로 넘어간다.
+// 취소하기 버튼 클릭시 이전 페이지로 넘어간다.
 $cancle.onclick = () => {
-  window.location.href = '/html/main.html';
+  window.history.go(-1);
 };
 
-$modiIfCurPw.onfocus = () => {
-  $message.classList.add('active');
-};
+[...$pws].forEach(pw => {
+  pw.onfocus = () => {
+    $message.classList.add('active');
+  }
+});
