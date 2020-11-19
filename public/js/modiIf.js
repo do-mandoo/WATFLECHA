@@ -14,7 +14,6 @@ const $message = document.querySelector('.message');
 console.log($message);
 
 // 가상으로 로컬스토리지에 저장하려고 한값이므로
-
   // ******지워주기******
 localStorage.setItem('login', 
   JSON.stringify({
@@ -34,17 +33,11 @@ let user = JSON.parse(localStorage.getItem('login'));
   input.value = `${user[key] ? user[key] : ''}`;
 });
 
-
-
 // 비밀번호 서로 다른지 확인
 const comparePw = (Pwelement) => {
   Pwelement.classList.add('errorColor');
   Pwelement.nextElementSibling.textContent = '비밀번호가 서로 다릅니다.';
 };
-
-// const index = $preference.selectedIndex;
-
-// [...$preference.options].filter(option => option.label === user.genre)[0].selected = true;
 
 $modiIfBt.onclick = async e => {
 
@@ -69,7 +62,7 @@ $modiIfBt.onclick = async e => {
       // 경고메세지를 생성해 그다음 요소로 넣어준다.
       input.classList.add('errorColor');
       
-      input.nextElementSibling.textContent = `${input.id === 'name' ? '이름을 입력해주십시오.' : input.id === 'id' ? '아이디를 입력해주십시오' : ''}`;
+      input.nextElementSibling.textContent = input.id === 'name' ? '이름을 입력해주십시오.' : input.id === 'id' ? '아이디를 입력해주십시오' : '';
       ++errorCount;
     }
   });
@@ -94,7 +87,7 @@ $modiIfBt.onclick = async e => {
     console.log(user);
 
     // 현재비밀번호 가져오기
-    const curPwRes = await fetch(`http://localhost:3000/users/${user.id}`);
+    const curPwRes = await fetch(`/users/${user.id}`);
     const modiUser = await curPwRes.json();
 
     // 현재 비밀번호와 입력한 비밀번호가 같은지 확인한다.
@@ -113,10 +106,9 @@ $modiIfBt.onclick = async e => {
     });
 
     // 비밀번호를 수정해준다.
-
     if (pwErrorCount > 0) return;
 
-    const modiPwRes = await fetch(`http://localhost:3000/users/${user.id}`, {
+    const modiPwRes = await fetch(`users/${user.id}`, {
       method:'PATCH',
       headers: { 'content-Type': 'application/json' },
       body: JSON.stringify({pw : `${$modiIfPw.value}`})
@@ -133,7 +125,7 @@ $modiIfBt.onclick = async e => {
 
   // 이름 수정시켜준다.
   // fetch주소 로그인 id로 수정시켜주기
-  const modiNameRes = await fetch(`http://localhost:3000/users/${user.id}`, {
+  const modiNameRes = await fetch(`/users/${user.id}`, {
       method:'PATCH',
       headers: { 'content-Type': 'application/json' },
       body: JSON.stringify({name : `${$modiIfName.value}`})
@@ -143,13 +135,12 @@ $modiIfBt.onclick = async e => {
   const index = $preference.selectedIndex;
 
   if(index > 0) {
-    const modiGenRes = await fetch(`http://localhost:3000/users/${user.id}`, {
+    const modiGenRes = await fetch(`/users/${user.id}`, {
       method:'PATCH', 
       headers: { 'content-Type': 'application/json' },
       body: JSON.stringify({genre : `${$preference.options[index].value}`})
     });
   }
-
 
   //수정된 이름을 서버에서 불러와서 name input에 value값으로 넣어준다.
   const modiNameUser = await modiNameRes.json();
@@ -161,7 +152,7 @@ $modiIfBt.onclick = async e => {
 
 // 취소하기 버튼 클릭스 메인으로 넘어간다.
 $cancle.onclick = () => {
-  window.location.href = 'http://localhost:3000/html/main.html';
+  window.location.href = '/html/main.html';
 };
 
 $modiIfCurPw.onfocus = () => {
