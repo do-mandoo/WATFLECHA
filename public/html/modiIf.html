@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/modiIf.css">
+  <script defer src="../js/modiIf.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+  <title>modiIf</title>
+</head>
+<body>
+  <div class="bg bgBlur">
+    <h1 class="logo"><a href="/"><img class="logo-img" src="../image/WATFLICHA-logo.png" alt="로고"></a></h1>
+    <div class="modiIf">
+      <h2>회원 정보수정</h2>
+      <input class="modiIf-content modiIf-name" id='name' type="text" placeholder="이름">
+      <p class="alert"></p>
+      <input class="modiIf-content modiIf-id" id='id'  type="text" placeholder="아이디" disabled>
+      <p class="alert message">비밀번호 변경 희망시 입력하세요</p>
+      <input class="modiIf-content modiIf-curPw pw" id='curPw' type="password"" placeholder="현재 비밀번호">
+      <p class="alert"></p>
+      <input class="modiIf-content modiIf-pw pw" id='pw' type="password" placeholder="새 비밀번호">
+      <p class="alert"></p>
+      <input class="modiIf-content modiIf-repw pw" id='repw' type="password" placeholder="새 비밀번호를 확인합니다.">
+      <p class="alert"></p>
+      <select class="preference" name="genre">
+        <option value="">선호 장르수정</option>
+        <option value="액션">액션</option>
+        <option value="애니메이션">애니메이션</option>
+        <option value="로맨스">로맨스</option>
+        <option value="스릴러">스릴러</option>
+        <option value="SF">SF</option>
+      </select>
+      <div class="bt">
+        <input class='modiIf-bt submit' type="button"" value="회원정보 수정">
+        <input class='modiIf-bt cancle' type="button"" value="취소하기">
+      </div>
+      <p class="completedMessage alert"></p>
+    </div>
+  </div>
+</body>
+</html>
