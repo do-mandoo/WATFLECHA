@@ -147,9 +147,10 @@ a.logout-btn:hover {
 .main section ul li span {
   position: absolute;
   font-size: 82px;
-  left: -10px;
-  top: -15px;
+  left: 30px;
+  bottom: 24px;
   opacity: 0.9;
+  text-shadow: #000 2px 2px 3px;
 }
 .main section ul li a {
   display: block;
@@ -170,16 +171,17 @@ a.logout-btn:hover {
 
 .main section button {
   position: absolute;
-  top: 48%;
+  top: 30%;
   color: #fff;
-  font-size: 30px;
+  font-size: 40px;
   outline: none;
+  padding: 20px 5px;
 }
 .main section .prev {
-  left: -20px;
+  left: -30px;
 }
 .main section .next {
-  right: -20px;
+  right: -30px;
 }
 /* popup-UI */
 

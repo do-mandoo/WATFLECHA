@@ -1,19 +1,19 @@
+if (!JSON.parse(localStorage.getItem("login"))) {
+  window.location.href = "../index.html";
+}
+
 const key = "00d9074f8fdaaf953fcbdf7b73aa351f";
 const lang = "ko";
 const imgBase = "https://image.tmdb.org/t/p/w500/";
 const $movieLists = document.querySelectorAll(".main section");
 const liWidth = document.querySelector("section").scrollWidth / 5;
 const $genreList = document.querySelector(".genre-list");
+const $topBtn = document.querySelector(".top-btn");
+const localUser = JSON.parse(localStorage.getItem("login"));
+let getBookmarks;
 
 let onMoving = false;
 let genreList = [];
-
-// $genreList.onclick = (e) => {
-//   if (!e.target.matches("ul>*")) return;
-//   // window.location.href("http://localhost:3000/html/genre.html");
-//   const search = [...$genreList].filter(list.name => e.target.firstElementChild.)
-//   console.log(e.target);
-// };
 
 const makeLi = (movie, ul, num) => {
   const $li = document.createElement("li");
@@ -27,7 +27,7 @@ const makeLi = (movie, ul, num) => {
   if (ul.classList.contains("top10-list")) {
     const $span = document.createElement("span");
     $span.textContent = num;
-    $li.appendChild($span);
+    $a.appendChild($span);
   }
   $li.appendChild($a);
   ul.appendChild($li);
@@ -148,39 +148,18 @@ const clickBtn = ($button, $ul) => {
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
 })();
 
-// fetch(
-//   `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&language=${lang}&page=1`
-// )
-//   .then((res) => res.json())
-//   .then(({ results }) => {
-//     $topList.style.width = `${results.length * 200}px`;
-//   });
+(async function () {
+  const users = await fetch(`/users/${localUser.id}`);
+  const { bookmarks } = await users.json();
+  getBookmarks = bookmarks;
+  console.log(getBookmarks);
+})();
 
-// fetch(
-//   `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=${lang}&page=1`
-// )
-//   .then((res) => res.json())
-//   .then(({ results }) => {
-//     $newList.style.width = `${results.length * 200}px`;
-//     results.forEach((movie) => {
-//       makeLi(movie, $newList);
-//     });
-//   });
-
-// fetch(`https://api.themoviedb.org/3/movie/531219/videos?api_key=${key}`)
-//   .then((res) => res.json())
-//   .then(({ results }) => {
-//     document.querySelector(
-//       ".video-container"
-//     ).innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${results[0].key}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
-//   });
-// '<iframe width="560" height="315" src="https://www.youtube.com/embed/9nlhmJF5FNI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-// `<iframe width="450" height="450" src="https://www.youtube.com/embed/${results[0].key}?autoplay=1" frameborder="0" allow="autoplay" picture-in-picture" allowfullscreen></iframe>`;
-// fetch(
-//   `https://api.themoviedb.org/3/movie/644479/credits?api_key=${key}&language=en-US`
-// )
-//   .then((res) => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-//https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>&language=en-US
+// 스크롤 이벤트
+$topBtn.onclick = () => {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+};
