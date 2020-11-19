@@ -26,7 +26,7 @@ $loginButton.onclick = async () => {
     //db의 id, pw 와 입력창의 id,pw가 같으면 추출. 추출된 값의 길이를 변수에 할당.
     const errorMessage = (elementNode) => {
       elementNode.classList.add('active');
-      elementNode.textContent = `${elementNode === $errorMsgEmptyId || elementNode === $errorMsgEmptyPw ? '공백안되요' : ''}`;
+      elementNode.textContent = `${elementNode === $errorMsgEmptyId || elementNode === $errorMsgEmptyPw ? '공백안돼요' : ''}`;
     }
 
     //id 입력창의 값이 공백이거나 db의 id와 다르면 오류 메시지 출력
@@ -62,7 +62,7 @@ $loginButton.onclick = async () => {
     }));
 
     localUser = JSON.parse(localStorage.getItem('login'));
-    // window.location.href="http://localhost:3000/html/main.html"
+    window.location.href="http://localhost:3000/html/main.html"
   }catch(err) {
     console.error('[ERROR~!]', err);
   }
