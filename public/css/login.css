@@ -28,7 +28,7 @@
 .login-box{
   background-color:#000;
   width: 400px;
-  height: 500px;
+  /* height: 500px; */
   padding: 45px 60px;
   position: absolute;
   top: 50%;
