@@ -1,65 +1,76 @@
 @import url(./reset.css);
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
-html,
-body {
-  height: 100%;
-}
+
+/* header */
 body {
   background: black;
-  color: #fff;
+  color: rgb(236, 236, 236);
   font-family: "Noto Sans KR", sans-serif;
   font-size: 16px;
-  overflow-x: hidden;
 }
+
 .header {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   padding: 20px 0;
 }
+
 .header__logo img {
   width: 160px;
   vertical-align: middle;
 }
+
 .header::after {
   content: "";
   display: block;
   clear: both;
 }
+
 .header__nav {
   position: absolute;
   right: 0;
-  top: 15%;
+  top: 50%;
+  transform: translate(0, -50%);
 }
+
 .header__nav li {
   float: left;
   margin: 10px 22px 0 0;
 }
+
 .header__nav li:first-child {
   transform: translate(0, 2px);
 }
+
 .header__nav li:first-child i {
   color: crimson;
+  font-size: 20px;
 }
+
 .header__nav li form {
   display: inline-block;
 }
+
 .header__nav #search {
-  width: 18px;
+  width: 20px;
   overflow: hidden;
+  transition: width 0.5s;
   white-space: nowrap;
   transition: all 0.3s;
+  cursor: pointer;
 }
+
+.header__nav #search i {
+  font-size: 20px;
+}
+
 .header__nav #search input {
   border-radius: 5px;
   padding: 5px;
   margin: 2px 2px 0 2px;
   outline: none;
 }
-.header__nav #search:hover {
-  width: 202px;
-}
+
 a.logout-btn {
   font-size: 14px;
   color: #fff;
@@ -74,84 +85,45 @@ a.logout-btn:hover {
   background-color: crimson;
   border: 2px solid crimson;
 }
-.genre-list {
-  width: 100%;
-  margin: 10px 0 0 0;
-}
-.genre-list li {
-  display: inline-block;
-  width: 19.5%;
-  padding: 10px;
-  text-align: center;
-  transition: background 0.5s;
-  border-radius: 4px;
-}
-.genre-list li a {
-  display: block;
-}
-.genre-list li:hover {
-  background: crimson;
-}
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  margin-top: -164px;
-  z-index: -1;
-  opacity: 0.6;
-}
-.video-container iframe,
-.video-container object,
-.video-container embed {
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 100%;
-}
-.main section {
-  margin-bottom: 20px;
-}
-.main #top_rated h2 {
-  margin-bottom: 20px;
-}
+
 /* main */
 .main {
-  margin-top: -150px;
   padding: 0 100px;
 }
-.main section {
-  position: relative;
+
+.main>h1 {
+  color: #fff;
+  margin-bottom: 50px;
 }
-.main section div {
-  padding: 20px 0;
-  overflow: hidden;
+
+.main__container__movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  /* space-evenly */
+  align-items: center;
+  align-content: center;
 }
-.main section ul {
-  transform: translateX(0);
-}
-.main section ul li {
-  float: left;
-  position: relative;
-  list-style-type: none;
+
+.main__container__movies>li {
   text-align: center;
+  width: 18%;
+  margin-right: 25px;
   font-size: 15px;
   line-height: 50px;
-  transition: all 0.3s ease-in-out;
 }
-.main section ul li:hover {
-  transform: scale(1.2);
-  z-index: 1;
+
+.main__container__movies>li:last-child {
+  margin-right: 0;
+}
+
+.main__container__movies>li:hover {
+  transform: scale(1.15);
+  transition: all 0.3s ease-in-out;
   background-color: #000;
 }
-.main section ul li span {
-  position: absolute;
-  font-size: 82px;
-  left: -10px;
-  top: -15px;
-  opacity: 0.9;
-}
-.main section ul li a {
+
+.main__container__movies>li>a {
   display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -159,28 +131,13 @@ a.logout-btn:hover {
   color: #fff;
   text-decoration: none;
 }
-.main section ul li img {
+
+.main__container__movies>li img {
   display: block;
   width: 100%;
   max-height: 350px;
 }
-.main section ul li:hover {
-  cursor: pointer;
-}
 
-.main section button {
-  position: absolute;
-  top: 48%;
-  color: #fff;
-  font-size: 30px;
-  outline: none;
-}
-.main section .prev {
-  left: -20px;
-}
-.main section .next {
-  right: -20px;
-}
 /* popup-UI */
 
 .overlay {
@@ -333,6 +290,7 @@ h3.popup__open__overviewTag {
   width: 25%;
   margin-top: 50px;
 }
+
 
 .top-btn {
   margin: 50px auto;

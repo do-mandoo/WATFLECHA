@@ -15,8 +15,8 @@ body {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px 0;
+  justify-content: flex-start;
+  padding: 20px;
 }
 .header__logo img {
   width: 160px;

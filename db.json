@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "Eojin Kim",
+      "name": "Alex",
+      "pw": "12345",
+      "genre": "SF",
+      "bookmarks": ["id","id"]
+    }
+  ]
+}
