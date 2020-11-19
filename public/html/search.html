@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>찜한 콘텐츠 | WHATFLECHA</title>
+  <title>검색 | WATFLECHA</title>
 
   <!-- css link -->
   <link rel="stylesheet" href="../css/search.css" />
 
   <!-- js link -->
   <script defer src="../js/search.js"></script>
+  <script defer src="../js/popup.js"></script>
 
   <link
       rel="stylesheet"
@@ -20,8 +21,8 @@
   <div class="wrap">
     <header class="header">
       <h1 class="header__logo">
-        <a href="/">
-          <img src="../image/logo.png" alt="WHATFLECHA 로고">
+        <a href="./main.html">
+          <img src="../image/WATFLICHA-logo.png" alt="WHATFLECHA 로고">
         </a>
       </h1>
       <nav class="header__nav">
@@ -37,12 +38,9 @@
             </a>
           </li>
           <li id="search">
-            <a>
-              <i class="fas fa-search"></i>
+            <a href="./search.html">
+              <i class="fas fa-search search-btn-top"></i>
             </a>
-            <form>
-              <input type="text" id="search-bar" class="hide" placeholder="검색할 영화를 입력하세요">
-            </form>
           </li>
           <li class="header__nav__logout">
             <a href="./login.html" class="logout-btn">로그아웃</a>
@@ -55,18 +53,17 @@
       <div class="search">
         <form class="search-form">
           <input type="text" id="search-bar2" class="search-bar" placeholder="검색할 영화를 입력하세요" >
-          <!-- <input type="submit"> -->
           <button class="fas fa-search search-btn" type="submit"><span>찾기</span></button>
         </form>
       </div>
       <div class="result">
-        <ul class="result_movies">
-          <!-- <li>
-            <a>
-                <img>
-                title
-              </a>
-            </li> -->
+        <ul class="result__movies">
+          <!-- <li class='${id}'>
+            <a href="#">
+              <img src=""></img>
+              title
+            </a>
+          </li> -->
           </ul>
         </div>
       </div>
@@ -76,8 +73,8 @@
         <div class="popup__defalt">
           <h3 class="popup__movieName"></h3>
           <span class="vote-data">평점 : <span class="vote"></span></span>
-          <i class="fas fa-heart like-btn liked">
-            <span style="color: #fff;">찜완료!</span>
+          <i class="fas fa-heart like-btn">
+            <span style="color: #fff;">찜하기</span>
           </i>
           <button class="open-btn"><i class="fas fa-chevron-down"></i></button>
         </div>
@@ -94,7 +91,7 @@
           </ul>
         </div>
       </div>
-      <button class="top-btn">더보기</button>
+      <button class="top-btn">맨 위로</button>
     </section>
     <div class="overlay"></div>
     <div class="heartPopup"><img src="../image/heart.png" /></div>
