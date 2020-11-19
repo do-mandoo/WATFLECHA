@@ -58,7 +58,7 @@ $closeBtn.onclick = async e => {
   
 
   // liked 유무에 따른 데이터 db에 반영
-  console.log($likeBtn.classList);
+
   if (!$likeBtn.classList.contains('liked')){
     try {
       const removedNewBookmarks = oldbookmarks.filter(bookmark => bookmark !== selectedId);
@@ -87,11 +87,42 @@ $closeBtn.onclick = async e => {
 }
 
 // overlay 클릭 이벤트
-$overlay.onclick = () => {
+
+$overlay.onclick = async () => {
   $popup.style.display = 'none';
   document.querySelector('.overlay').style.display = 'none';
   document.querySelector('.fa-chevron-down').classList.remove('active');
   $popupOpen.style.height = 0;
+
+  const res = await fetch(`/users/${user.id}`);
+  const {bookmarks : oldbookmarks} = await res.json();
+
+  // liked 유무에 따른 데이터 db에 반영
+  if (!$likeBtn.classList.contains('liked')){
+    try {
+      const removedNewBookmarks = oldbookmarks.filter(bookmark => bookmark !== selectedId);
+      await fetch(`/users/${user.id}`, {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json'},
+        body: JSON.stringify({bookmarks: removedNewBookmarks})
+      })
+      $main__container__movies.removeChild(document.getElementById(selectedId));
+    } catch (err) {
+      console.log('[ERROR]', err);
+    };
+  } else {
+    try {
+      if(oldbookmarks.indexOf(selectedId) !== -1) return;
+      const addedNewBookmarks = oldbookmarks.concat(selectedId);
+      await fetch(`/users/${user.id}`, {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json'},
+        body: JSON.stringify({bookmarks: addedNewBookmarks})
+      })
+    } catch (err) {
+      console.log('[ERROR]', err);
+    };
+  }
 }
 
 // 스크롤 이벤트
@@ -149,11 +180,12 @@ $main__container__movies.onclick = async e => {
     // const {title, vote_average, overview, release_date, genres, runtime} = await resMovie.json();
     const movie = await resMovie.json();
 
+
+    // 배우 API
     const resActors = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}/credits?api_key=${api_key}&language=ko`)
     const mainActors = await resActors.json();
     const actors = mainActors.cast.slice(0,4).map(actor => actor.name).join(', ');
 
-    // popup(title, vote_average, overview, release_date, genres[0].name, runtime, actors);
     popup(movie, actors);
 
     // 예고편 youtube API
@@ -189,8 +221,6 @@ const render = (userName, results) => {
   $li.appendChild($a);
   $main__container__movies.appendChild($li);
 }
-
-
 
 // <li class='${id}'>
 //   <a href="#">

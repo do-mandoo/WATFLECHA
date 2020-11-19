@@ -100,7 +100,6 @@ a.logout-btn:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  /* space-evenly */
   align-items: center;
   align-content: center;
 }

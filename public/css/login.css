@@ -1,9 +1,9 @@
-@import url(/public/css/reset.css);
+/* @import url(/public/css/reset.css); */
 
 .container{
-  background: url(../image/login-bg-image.jpg) no-repeat;
+  background: url(../image/signBG.jpg) no-repeat;
   width: 100%;
-  height: 1000px;
+  height: 927px;
 }
 
 .login-box{
@@ -11,7 +11,7 @@
   width: 400px;
   height: 500px;
   margin: 0 auto;
-  padding: 60px;
+  padding: 45px 60px;
 }
 
 h1{
@@ -19,18 +19,17 @@ h1{
   font-size: 40px;
 }
 
-form{
-  display: flex;
-  flex-flow: column wrap;
-  padding-top: 30px;
+input{
+  margin-top: 20px;
+  padding: 0px 8px;
+  border-radius: 4px;
+  width: 100%;
+  height: 40px;
+  background-color: #333;
+  border: none;
+  color: #fff;
 }
 
-input{
-  margin-bottom: 20px;
-  padding: 10px 8px;
-  border-radius: 5px;
-  background-color: #aaa;
-}
 input:hover{
   caret-color: #fff;
   background-color:#800000;
@@ -42,11 +41,17 @@ input[type=submit]:hover{
   text-decoration: underline;
 }
 
+.error-message{
+  color: tomato;
+}
+
 .login-button{
   background-color:#e50914;
   color: #fff;
-  font-size: large;
-  border-radius: 8px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 4px;
   border: none;
 }
 
@@ -55,17 +60,62 @@ input[type=submit]:hover{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 15px;
 }
 
-.login-remember>input[type=checkbox]{
+.login-remember{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.login-remember>input{
   margin: 0;
   padding: 0;
+  width: 10px;
+}
+
+.login-remember>label{
+  padding-left: 5px;
 }
 
 .login-help-link{
   display: inline-block;
 }
+
 .login-help-link:hover{
   text-decoration: underline;
 }
 
+.underline{
+  width: 100%;
+  border: 1px solid #aaa;
+  margin: 25px 0 20px 0;
+}
+
+.no-member{
+  color: #aaa;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.sign-up-go{
+  color: #ddd;
+  background-color: #e50914;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+}
+
+.sign-up-go:hover{
+  cursor: pointer;
+  background-color: #ff4500;
+  text-decoration: underline;
+}
+.active{
+  display: block;
+}
