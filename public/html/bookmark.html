@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>찜한 콘텐츠 | WHATFLECHA</title>
+
+  <!-- css link -->
+  <link rel="stylesheet" href="../css/bookmark.css" />
+
+  <!-- js link -->
+  <script defer src="../js/bookmark.js"></script>
+  <script defer src="../js/popup.js"></script>
+
+  <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    />
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <h1 class="header__logo">
+        <a href="/">
+          <img src="../image/logo.png" alt="WHATFLECHA 로고">
+        </a>
+      </h1>
+      <nav class="header__nav">
+        <ul>
+          <li id="bookmark">
+            <a href="./bookmark.html">
+              <i class="fas fa-heart"></i>
+            </a>
+          </li>
+          <li id="userInfo">
+            <a href="./modiIf.html">
+              <i class="fas fa-user-alt"></i>
+            </a>
+          </li>
+          <li id="search">
+            <a>
+              <i class="fas fa-search"></i>
+            </a>
+            <form>
+              <input type="text" id="search-bar" class="hide" placeholder="검색할 영화를 입력하세요">
+            </form>
+          </li>
+          <li class="header__nav__logout">
+            <a href="/" class="logout-btn">로그아웃</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="main">
+      <h1><span class="main__name"></span>님이 찜한 콘텐츠</h1>
+      <div class="main__container">
+        <ul class="main__container__movies">
+          <!-- <li class='${id}'>
+            <a href="#">
+              <img src=""></img>
+              title
+            </a>
+          </li> -->
+        </ul>
+      </div>
+      <div class="popup">
+        <button class="close-btn">X</button>
+        <div class="popup__video"></div>
+        <div class="popup__defalt">
+          <h3 class="popup__movieName"></h3>
+          <span class="vote-data">평점 : <span class="vote"></span></span>
+          <i class="fas fa-heart like-btn liked">
+            <span style="color: #fff;">찜완료!</span>
+          </i>
+          <button class="open-btn"><i class="fas fa-chevron-down"></i></button>
+        </div>
+        <div class="popup__open">
+          <div class="popup__open__overviewAll">
+            <h3 class="popup__open__overviewTag">줄거리</h3>
+            <p class="overview"></p>
+          </div>
+          <ul class="popup__open__details">
+            <li class="release-date-data">개봉일 : <span class="release-date"></span></li>
+            <li class="genre-data">장르 : <span class="genre"></span></li>
+            <li class="runtime-data">총 상영시간 : <span class="runtime"></span>분</li>
+            <li class="actors-data">출연 : <br><span class="actors"></span></li>
+          </ul>
+        </div>
+      </div>
+      <button class="top-btn">맨 위로</button>
+    </section>
+    <div class="overlay"></div>
+    <div class="heartPopup"><img src="../image/heart.png" /></div>
+  </body>
+  </html>
