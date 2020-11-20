@@ -109,7 +109,7 @@ $main__container__movies.onclick = async (e) => {
     if(results.length !== 0) {
     $popupVideo.innerHTML = `<iframe width="770" height="350" src="https://www.youtube.com/embed/${results[0].key}?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
-      $popupVideo.innerHTML = `<img src="../image/비디오준비중.jpg" width:720px >`;
+      $popupVideo.innerHTML = `<img src="../image/비디오준비중.jpg" >`;
     }
   } catch (err) {
     console.log("[ERROR]", err);
