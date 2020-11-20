@@ -1,14 +1,4 @@
 {
   "users": [
-    {
-      "name": "hihi",
-      "id": "hihi",
-      "pw": "123",
-      "genre": "로맨스",
-      "bookmarks": [
-        "671",
-        "767"
-      ]
-    }
   ]
 }

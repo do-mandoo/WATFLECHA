@@ -23,7 +23,6 @@ const $header__logo = document.querySelector(".header__logo");
 const $heartPopup = document.querySelector(".heartPopup");
 
 let selectedId;
-let getBookmarks;
 const localUser = JSON.parse(localStorage.getItem("login"));
 
 const popup = (movie, actors) => {

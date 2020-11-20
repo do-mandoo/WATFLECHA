@@ -1,3 +1,4 @@
+
 if (!JSON.parse(localStorage.getItem("login"))) {
   window.location.href = "../index.html";
 }
@@ -8,8 +9,6 @@ const $logOut = document.getElementById("logout");
 const $movieLists = document.querySelectorAll(".main section");
 const liWidth = document.querySelector("section").scrollWidth / 5;
 const $genreList = document.querySelector(".genre-list");
-const $topBtn = document.querySelector(".top-btn");
-const localUser = JSON.parse(localStorage.getItem("login"));
 let getBookmarks;
 
 let onMoving = false;
@@ -53,10 +52,18 @@ const cloneLi = (ul) => {
 };
 
 const getMovieList = async (getValue, $ul) => {
+  if(getValue === 'favorite'){
+    const genreRes = await fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=ko`
+    );
+    const { genres } = await genreRes.json();
+    genreList = genres;
+    console.log(genreList);
+  }
   const url =
     getValue === "favorite"
-      ? `https://api.themoviedb.org/3/discover/movie?api_key=${key}&with_genres=14&language=${lang}`
-      : `https://api.themoviedb.org/3/movie/${getValue}?api_key=${key}&language=${lang}&page=1`;
+      ? `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${genreList.find(genreLi => genreLi.name === localUser.genre).id}&language=${lang}`
+      : `https://api.themoviedb.org/3/movie/${getValue}?api_key=${api_key}&language=${lang}&page=1`;
   const res = await fetch(url);
   const { results: movies } = await res.json();
   await movies.forEach((movie, i) => {
@@ -113,7 +120,9 @@ const clickBtn = ($button, $ul) => {
   };
 };
 
+
 [...$movieLists].forEach(($list) => {
+  console.log(2);
   getMovieList($list.id, $list.querySelector("ul"));
 });
 
@@ -127,18 +136,11 @@ const clickBtn = ($button, $ul) => {
   };
 });
 
-(async function () {
-  const genreRes = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=ko`
-  );
-  const { genres } = await genreRes.json();
-  genreList = genres;
-  console.log(genreList);
-})();
+
 
 (async function () {
   const videoRes = await fetch(
-    `https://api.themoviedb.org/3/movie/531219/videos?api_key=${key}`
+    `https://api.themoviedb.org/3/movie/531219/videos?api_key=${api_key}`
   );
   const { results } = await videoRes.json();
   document.querySelector(
