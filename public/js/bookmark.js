@@ -115,7 +115,6 @@ $closeBtn.onclick = async e => {
   document.querySelector('.overlay').style.display = 'none';
   document.querySelector('.fa-chevron-down').classList.remove('active');
   $popupOpen.style.height = 0;
-  // $likeBtn.classList.add('liked')
   $likeBtn.firstElementChild.innerHTML = '찜완료!'
   
   const res = await fetch(`/users/${user.id}`);
