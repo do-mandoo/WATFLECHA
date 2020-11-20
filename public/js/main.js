@@ -1,5 +1,4 @@
-
-if (!JSON.parse(localStorage.getItem("login"))) {
+if (!localUser.curlog) {
   window.location.href = "../index.html";
 }
 
@@ -50,9 +49,8 @@ const cloneLi = (ul) => {
     }
   }
 };
-
 const getMovieList = async (getValue, $ul) => {
-  if(getValue === 'favorite'){
+  if (getValue === "favorite") {
     const genreRes = await fetch(
       `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=ko`
     );
@@ -62,7 +60,9 @@ const getMovieList = async (getValue, $ul) => {
   }
   const url =
     getValue === "favorite"
-      ? `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${genreList.find(genreLi => genreLi.name === localUser.genre).id}&language=${lang}`
+      ? `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&with_genres=${
+          genreList.find((genreLi) => genreLi.name === localUser.genre).id
+        }&language=${lang}`
       : `https://api.themoviedb.org/3/movie/${getValue}?api_key=${api_key}&language=${lang}&page=1`;
   const res = await fetch(url);
   const { results: movies } = await res.json();
@@ -77,7 +77,6 @@ const clickBtn = ($button, $ul) => {
   if (onMoving) return;
   onMoving = true;
   $ul.style.transition = "all 0.5s";
-
   const start = $ul.style.transform.indexOf("(") + 1;
   const end = $ul.style.transform.indexOf("p");
   const ulWidth = +$ul.style.width.slice(0, -2);
@@ -85,7 +84,6 @@ const clickBtn = ($button, $ul) => {
   const maxMove = divWidth - ulWidth;
   let moveValue = +$ul.style.transform.substring(start, end);
   const movingValue = liWidth * 2;
-
   if ($button.classList.contains("prev")) {
     moveValue =
       moveValue + movingValue <= -movingValue
@@ -120,12 +118,10 @@ const clickBtn = ($button, $ul) => {
   };
 };
 
-
 [...$movieLists].forEach(($list) => {
   console.log(2);
   getMovieList($list.id, $list.querySelector("ul"));
 });
-
 [...$movieLists].forEach(($section) => {
   $section.querySelector("ul").style.transform = `translateX(${-(
     4 * liWidth
@@ -135,8 +131,6 @@ const clickBtn = ($button, $ul) => {
     if (e.target.matches("button")) clickBtn(e.target, $ul);
   };
 });
-
-
 
 (async function () {
   const videoRes = await fetch(
@@ -149,13 +143,11 @@ const clickBtn = ($button, $ul) => {
   frameborder="0" style="width: 100vw; height: 100%;"
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
 })();
-
 (async function () {
   const users = await fetch(`/users/${localUser.id}`);
   const { bookmarks } = await users.json();
   getBookmarks = bookmarks ? bookmarks : [];
 })();
-
 // 스크롤 이벤트
 $topBtn.onclick = () => {
   window.scroll({
@@ -166,6 +158,15 @@ $topBtn.onclick = () => {
 };
 
 // 로그아웃
-$logOut.onclick = () => {
-  localStorage.clear();
+$logOut.onclick = e => {
+  localStorage.setItem(
+    "login",
+    JSON.stringify({
+      id: localUser.id,
+      name: localUser.name,
+      genre: localUser.genre,
+      savelog: localUser.savelog,
+      curlog: false
+    })
+  );
 };
