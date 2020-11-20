@@ -1,30 +1,30 @@
-const api_key = '173b78669a3a668e66151ca4a6a82176';
+const api_key = "173b78669a3a668e66151ca4a6a82176";
 
-const $main__container__movies = document.querySelector('.main');
-const $main__name = document.querySelector('.main__name');
-const $popup = document.querySelector('.popup');
-const $popupOpen = document.querySelector('.popup__open');
-const $openBtn = document.querySelector('.open-btn');
-const $closeBtn = document.querySelector('.close-btn');
-const $likeBtn = document.querySelector('.like-btn');
-const $topBtn = document.querySelector('.top-btn');
-const $popupVideo = document.querySelector('.popup__video');
-const $result__movies = document.querySelector('.result__movies');
-const $popup__movieName = document.querySelector('.popup__movieName');
-const $vote = document.querySelector('.vote');
-const $overview = document.querySelector('.overview');
-const $releaseDate = document.querySelector('.release-date');
-const $genre = document.querySelector('.genre');
-const $actors = document.querySelector('.actors');
-const $runtime = document.querySelector('.runtime');
-const $overlay = document.querySelector('.overlay');
-const $search = document.querySelector('.search-btn-top');
-const $header__logo = document.querySelector('.header__logo');
-const $heartPopup = document.querySelector('.heartPopup');
+const $main__container__movies = document.querySelector(".main");
+const $main__name = document.querySelector(".main__name");
+const $popup = document.querySelector(".popup");
+const $popupOpen = document.querySelector(".popup__open");
+const $openBtn = document.querySelector(".open-btn");
+const $closeBtn = document.querySelector(".close-btn");
+const $likeBtn = document.querySelector(".like-btn");
+const $topBtn = document.querySelector(".top-btn");
+const $popupVideo = document.querySelector(".popup__video");
+const $result__movies = document.querySelector(".result__movies");
+const $popup__movieName = document.querySelector(".popup__movieName");
+const $vote = document.querySelector(".vote");
+const $overview = document.querySelector(".overview");
+const $releaseDate = document.querySelector(".release-date");
+const $genre = document.querySelector(".genre");
+const $actors = document.querySelector(".actors");
+const $runtime = document.querySelector(".runtime");
+const $overlay = document.querySelector(".overlay");
+const $search = document.querySelector(".search-btn-top");
+const $header__logo = document.querySelector(".header__logo");
+const $heartPopup = document.querySelector(".heartPopup");
 
 let selectedId;
 let getBookmarks;
-const localUser = JSON.parse(localStorage.getItem('login'));
+const localUser = JSON.parse(localStorage.getItem("login"));
 
 const popup = (movie, actors) => {
   if (selectedId) $popup__movieName.innerHTML = movie.title;
@@ -79,7 +79,7 @@ $openBtn.onclick = () => {
 // popup창 클릭 이벤트
 $main__container__movies.onclick = async (e) => {
   if (!e.target.matches("li *")) return;
-  if(e.target.parentNode.matches('a')) e.preventDefault();
+  if (e.target.parentNode.matches("a")) e.preventDefault();
   selectedId = e.target.parentNode.parentNode.id;
   $popup.style.display = "block";
   $overlay.style.display = "block";
@@ -89,7 +89,7 @@ $main__container__movies.onclick = async (e) => {
       `https://api.themoviedb.org/3/movie/${selectedId}?api_key=${api_key}&language=ko`
     );
     const movie = await resMovie.json();
-    
+
     // 배우 API
     const resActors = await fetch(
       `https://api.themoviedb.org/3/movie/${selectedId}/credits?api_key=${api_key}&language=ko`
@@ -106,8 +106,8 @@ $main__container__movies.onclick = async (e) => {
       `https://api.themoviedb.org/3/movie/${selectedId}/videos?api_key=${api_key}`
     );
     const { results } = await resVideo.json();
-    if(results.length !== 0) {
-    $popupVideo.innerHTML = `<iframe width="770" height="350" src="https://www.youtube.com/embed/${results[0].key}?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    if (results.length !== 0) {
+      $popupVideo.innerHTML = `<iframe width="770" height="350" src="https://www.youtube.com/embed/${results[0].key}?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
       $popupVideo.innerHTML = `<img src="../image/비디오준비중.jpg" >`;
     }

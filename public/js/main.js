@@ -2,9 +2,9 @@ if (!JSON.parse(localStorage.getItem("login"))) {
   window.location.href = "../index.html";
 }
 
-const key = "00d9074f8fdaaf953fcbdf7b73aa351f";
 const lang = "ko";
 const imgBase = "https://image.tmdb.org/t/p/w500/";
+const $logOut = document.getElementById("logout");
 const $movieLists = document.querySelectorAll(".main section");
 const liWidth = document.querySelector("section").scrollWidth / 5;
 const $genreList = document.querySelector(".genre-list");
@@ -151,8 +151,7 @@ const clickBtn = ($button, $ul) => {
 (async function () {
   const users = await fetch(`/users/${localUser.id}`);
   const { bookmarks } = await users.json();
-  getBookmarks = bookmarks;
-  console.log(getBookmarks);
+  getBookmarks = bookmarks ? bookmarks : [];
 })();
 
 // 스크롤 이벤트
@@ -162,4 +161,9 @@ $topBtn.onclick = () => {
     left: 0,
     behavior: "smooth",
   });
+};
+
+// 로그아웃
+$logOut.onclick = () => {
+  localStorage.clear();
 };
