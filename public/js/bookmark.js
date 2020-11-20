@@ -154,10 +154,10 @@ $overlay.onclick = async () => {
   document.querySelector('.overlay').style.display = 'none';
   document.querySelector('.fa-chevron-down').classList.remove('active');
   $popupOpen.style.height = 0;
-
+  
   const res = await fetch(`/users/${user.id}`);
   const {bookmarks : oldbookmarks} = await res.json();
-
+  
   // liked 유무에 따른 데이터 db에 반영
   if (!$likeBtn.classList.contains('liked')){
     try {

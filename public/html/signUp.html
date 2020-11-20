@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="../css/signUp.css">
   <script defer src="../js/signUp.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
-  <title>sign-up</title>
+  <title>singUp | WATFLECHA</title>
 </head>
 <body>
   <div class="bg bgBlur">
-    <h1 class="logo"><a href=""><img class="logo-img" src="../image/WATFLICHA-logo.png" alt="로고"></a></h1>
+    <h1 class="logo"><a href="/"><img class="logo-img" src="../image/WATFLICHA-logo.png" alt="로고"></a></h1>
     <div class="signUp">
       <h2>회원가입</h2>
-      <form class="signUp-form" action="http://localhost:3000/users" method="POST">
+      <form class="signUp-form" action="/users" method="POST">
         <input class="signUp-content signup-name" id='name' name="name" type="text" placeholder="이름">
         <p class="alert"></p>
         <input class="signUp-content signup-id" id='id' name="id" type="text" placeholder="아이디">
@@ -30,7 +30,10 @@
           <option value="스릴러">스릴러</option>
           <option value="SF">SF</option>
         </select>
-        <input class='signUp-bt' type="submit" value="회원가입"> 
+        <div class="bt">
+          <input class='signUp-bt' type="submit" value="회원가입"> 
+          <input class='signUp-bt cancle' type="button"" value="취소하기" onClick="location.href='/'">
+        </div>
       </form>
     </div>
   </div>

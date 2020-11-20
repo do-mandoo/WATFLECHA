@@ -12,6 +12,7 @@ const $signUpGo = document.querySelector('.sign-up-go');
 const $errorMessage = document.querySelectorAll('.error-message');
 
 let saveLogin;
+
 //보낼때, 아이디랑 비밀번호 중복되는지,
 $loginButton.onclick = async () => {
   try {
@@ -25,7 +26,7 @@ $loginButton.onclick = async () => {
     //db의 id, pw 와 입력창의 id,pw가 같으면 추출. 추출된 값의 길이를 변수에 할당.
     const errorMessage = (elementNode) => {
       elementNode.classList.add('active');
-      elementNode.textContent = `${elementNode === $errorMsgEmptyId || elementNode === $errorMsgEmptyPw ? '공백안되요' : ''}`;
+      elementNode.textContent = `${elementNode === $errorMsgEmptyId || elementNode === $errorMsgEmptyPw ? '공백안돼요' : ''}`;
     }
 
     //id 입력창의 값이 공백이거나 db의 id와 다르면 오류 메시지 출력
@@ -78,3 +79,4 @@ window.onload = () => {
     $loginId.value = localUser.id;
   }
 }
+
