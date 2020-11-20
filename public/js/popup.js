@@ -60,7 +60,7 @@ const modifyBookMarks = async () => {
     });
     const { bookmarks } = await patchLi.json();
     getBookmarks = bookmarks;
-    $popupVideo.innerHTML = '';
+    $popupVideo.innerHTML = "";
   } catch (err) {
     console.log("[ERROR]", err);
   }
@@ -89,7 +89,7 @@ $main__container__movies.onclick = async (e) => {
       `https://api.themoviedb.org/3/movie/${selectedId}?api_key=${api_key}&language=ko`
     );
     const movie = await resMovie.json();
-    
+
     // 배우 API
     const resActors = await fetch(
       `https://api.themoviedb.org/3/movie/${selectedId}/credits?api_key=${api_key}&language=ko`
