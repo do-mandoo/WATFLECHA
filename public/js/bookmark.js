@@ -29,6 +29,28 @@ if (!user.curlog) {
   location.assign("/");
 }
 
+// 로그인 한 user 이름 표시
+$userName.innerHTML = user.name;
+
+// 첫 화면에서 db bookmark 정보 가져와 화면에 렌더링
+(async () => {
+  try {
+    const users = await fetch(`/users/${user.id}`);
+    const {bookmarks} = await users.json();
+    bookmarks
+    .forEach(async movie_id => {
+      // 이 안에서 get 요청을 할 것
+      const url = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api_key}&language=ko`;
+      const res = await fetch(url);
+      const results = await res.json();
+      // console.log(results);
+      render(results);
+    });
+  } catch (err) {
+    console.log('[ERROR]', err);
+  }
+})();
+
 const render = (results) => {
   const $li = document.createElement('li');
   $li.id = results.id;
@@ -64,7 +86,6 @@ const popup = (movie, actors) => {
 }
 
 //event handler
-
 // 영화 클릭시 popup
 $main__container__movies.onclick = async e => {
   if(!e.target.matches('.main__container__movies *')) return;
@@ -217,24 +238,6 @@ $topBtn.onclick = () => {
     behavior: 'smooth'
   });
 }
-$userName.innerHTML = user.name;
-(async () => {
-  try {
-    const users = await fetch(`/users/${user.id}`);
-    const {bookmarks} = await users.json();
-    bookmarks
-    .forEach(async movie_id => {
-      // 이 안에서 get 요청을 할 것
-      const url = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api_key}&language=ko`;
-      const res = await fetch(url);
-      const results = await res.json();
-      // console.log(results);
-      render(results);
-    });
-  } catch (err) {
-    console.log('[ERROR]', err);
-  }
-})();
 
 $logoutBtn.onclick = () => {
   localStorage.setItem(
