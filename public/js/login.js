@@ -13,7 +13,7 @@ const $errorMessage = document.querySelectorAll('.error-message');
 
 let saveLogin;
 
-//보낼때, 아이디랑 비밀번호 중복되는지,
+//로그인 버튼 클릭때 Id, pw 빈문자열로 초기화해주기.
 $loginButton.onclick = async () => {
   $errorMsgEmptyId.textContent = '';
   $errorMsgEmptyPw.textContent = '';
@@ -21,7 +21,7 @@ $loginButton.onclick = async () => {
     let errorcount = 0;
     [...$errorMessage].forEach(error => error.classList.remove('active'));
 
-    //json가져와서 객체로 풀기
+    //json가져와서(GET) 객체로 풀기(json())
     const res = await fetch(`/users/${$loginId.value}`);
     users = await res.json();
 
