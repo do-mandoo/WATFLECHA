@@ -28,8 +28,10 @@ if (!JSON.parse(localStorage.getItem("login"))) {
   location.assign('/');
 };
 
-const render = (userName, results) => {
-  $userName.innerHTML = userName;
+console.log(1);
+const render = (results) => {
+  console.log(2);
+  // $userName.innerHTML = userName;
   const $li = document.createElement('li');
   $li.id = results.id;
   const $a = document.createElement('a');
@@ -74,6 +76,7 @@ $main__container__movies.onclick = async e => {
   $likeBtn.classList.add('liked');
   $likeBtn.firstElementChild.innerHTML = '찜완료!'
 
+  console.log(e.target);
   try {
     // 영화 API로 popup창 개별 정보 가져오기
     const resMovie = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}?api_key=${api_key}&language=ko`);
@@ -216,11 +219,12 @@ $topBtn.onclick = () => {
     behavior: 'smooth'
   });
 }
-
+$userName.innerHTML = user.name;
 (async () => {
+  console.log(3);
   try {
     const users = await fetch(`/users/${user.id}`);
-    const {name, bookmarks} = await users.json();    
+    const {bookmarks} = await users.json();
     bookmarks
     .forEach(async movie_id => {
       // 이 안에서 get 요청을 할 것
@@ -228,7 +232,8 @@ $topBtn.onclick = () => {
       const res = await fetch(url);
       const results = await res.json();
       // console.log(results);
-      render(name, results);
+      render(results);
+      console.log(4);
     });
   } catch (err) {
     console.log('[ERROR]', err);
