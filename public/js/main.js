@@ -8,6 +8,7 @@ const $logOut = document.getElementById("logout");
 const $movieLists = document.querySelectorAll(".main section");
 const liWidth = document.querySelector("section").scrollWidth / 5;
 const $genreList = document.querySelector(".genre-list");
+let getBookmarks;
 
 let onMoving = false;
 let genreList = [];
@@ -116,6 +117,7 @@ const clickBtn = ($button, $ul) => {
     onMoving = false;
   };
 };
+
 [...$movieLists].forEach(($list) => {
   console.log(2);
   getMovieList($list.id, $list.querySelector("ul"));
@@ -129,6 +131,7 @@ const clickBtn = ($button, $ul) => {
     if (e.target.matches("button")) clickBtn(e.target, $ul);
   };
 });
+
 (async function () {
   const videoRes = await fetch(
     `https://api.themoviedb.org/3/movie/531219/videos?api_key=${api_key}`
