@@ -1,3 +1,7 @@
+// 만약 로그인안한 상태로 페이지에 접근할 경우
+// 로컬스토리지에 찾으려는 값이 없는경우 null이 반환된다.
+if(!localStorage.getItem('login')) window.location.href = '/';
+
 const $modiIfBt = document.querySelector('.modiIf-bt');
 const $modiIfName = document.querySelector('.modiIf-name');
 const $modiIfId = document.querySelector('.modiIf-id');
@@ -11,17 +15,6 @@ const $completedMessage = document.querySelector('.completedMessage');
 const $modiBt = document.querySelectorAll('.modi-bt');
 const $cancle = document.querySelector('.cancle');
 const $message = document.querySelector('.message');
-console.log($message);
-
-// 가상으로 로컬스토리지에 저장하려고 한값이므로
-  // ******지워주기******
-localStorage.setItem('login', 
-  JSON.stringify({
-    id: 'Alex123', 
-    name: 'Alex', 
-    genre: 'SF', 
-    bookmarks: ["726739", "718444", "524047", "531219", "652004", "413518"]
-}));
 
 // 로컬스토리지에 데이터를 쌓이게 해준다.
 let user = JSON.parse(localStorage.getItem('login'));
@@ -51,21 +44,46 @@ $modiIfBt.onclick = async e => {
 
     // 값을 올바르게 입력한후 다시 제출이벤트를 했을때 이전의 에러 색깔을 지워준다.
     modiIfInput.classList.remove('errorColor');
-  });
+  });  
 
   // 인풋창이 빈값일경우 에러 메세지, 인풋창 색깔 변경
   // pw인풋창을 제외한 나머지 input만 골라준다
-  const exPwInput = [...$modiIfContent].filter(input => !input.classList.contains('pw'))
 
-  exPwInput.forEach(input => {
-    if (input.value === '') {
-      // 경고메세지를 생성해 그다음 요소로 넣어준다.
-      input.classList.add('errorColor');
+  // // 이름인풋만 해주면 되므로 코드 리펙토링하기
+  // const exPwInput = [...$modiIfContent].filter(input => !input.classList.contains('pw'))
+
+  // exPwInput.forEach(input => {
+  //   if (input.value === '') {
+  //     // 경고메세지를 생성해 그다음 요소로 넣어준다.
+  //     input.classList.add('errorColor');
       
-      input.nextElementSibling.textContent = input.id === 'name' ? '이름을 입력해주십시오.' : input.id === 'id' ? '아이디를 입력해주십시오' : '';
+  //     input.nextElementSibling.textContent = input.id === 'name' ? '이름을 입력해주십시오.' : input.id === 'id' ? '아이디를 입력해주십시오' : '';
+  //     ++errorCount;
+  //   }
+  // });
+
+  // 기존의 이름과 동일한경우 에러메세지 넣어주기.
+  // 이름 인풋창이 비어있거나, 기존 이름과 동일한 경우
+  // 이름 인풋에서만 에러가 발생할 수 있게한다.
+
+  // 현재 비밀번호가 비어있거나
+  // 현재 비밀번호가 있을경우
+  if ($modiIfCurPw.value === ''){
+    if ($modiIfName.value === user.name) { // 기존의 이름과 동일한 경우
+      $modiIfName.nextElementSibling.textContent = '기존의 이름과 동일합니다.';
+      ++errorCount;
+    } else if($modiIfName.value === '') { // 이름 인풋창이 비어있는 경우
+      $modiIfName.nextElementSibling.textContent = '이름을 입력해주십시오.';
       ++errorCount;
     }
-  });
+  } else { // 현재 비밀번호 인풋창이 있는경우
+    if($modiIfName.value === '') { // 이름 인풋창이 비어있는 경우
+      $modiIfName.nextElementSibling.textContent = '이름을 입력해주십시오.';
+      ++errorCount;
+    }
+  }
+  
+  
 
   // pw 인풋 태그들이 비어있는지 확인
   // 인풋창이 비어있지 않은 경우에만 배열에 할당
@@ -80,11 +98,11 @@ $modiIfBt.onclick = async e => {
     if ($modiIfPw.value !== $modiIfRepw.value) {
       comparePw($modiIfPw);
       comparePw($modiIfRepw);
+      $completedMessage.textContent = '';
       ++pwErrorCount;
     }
 
-    let user = JSON.parse(localStorage.getItem('login'));
-    console.log(user);
+    // let user = JSON.parse(localStorage.getItem('login'));
 
     // 현재비밀번호 가져오기
     const curPwRes = await fetch(`/users/${user.id}`);
@@ -94,8 +112,12 @@ $modiIfBt.onclick = async e => {
     if ($modiIfCurPw.value !== modiUser.pw) {
       comparePw($modiIfCurPw);
       ++pwErrorCount;
-    }    
+    } else if($modiIfPw.value === modiUser.pw && $modiIfRepw.value === modiUser.pw) { // 변경하려는 비밀번호가 기존의 비밀번호와 일치한지 비교
+      $completedMessage.textContent = '기존의 비밀번호와 동일합니다.';
+      ++pwErrorCount;
+    }
 
+    // 비밀번호 인풋창이 비어있는 경우
     [...$pws].forEach(pw => {
       if (pw.value === '') {
         // 경고메세지를 생성해 그다음 요소로 넣어준다.
@@ -108,7 +130,7 @@ $modiIfBt.onclick = async e => {
     // 비밀번호를 수정해준다.
     if (pwErrorCount > 0) return;
 
-    const modiPwRes = await fetch(`users/${user.id}`, {
+    const modiPwRes = await fetch(`/users/${user.id}`, {
       method:'PATCH',
       headers: { 'content-Type': 'application/json' },
       body: JSON.stringify({pw : `${$modiIfPw.value}`})
@@ -123,6 +145,20 @@ $modiIfBt.onclick = async e => {
   // 에러가 있으면 count 개수를 늘려 만약 양수인경우 함수를 중단시킨다.
   if (errorCount > 0) return;
 
+  // 장르를 수정해준다.
+  const index = $preference.selectedIndex;
+
+  // 로컬스토리지 수정
+  localStorage.setItem('login',
+  JSON.stringify({
+    id: user.id,
+    name: $modiIfName.value,
+    genre: $preference.options[index].value ? $preference.options[index].value : user.genre, // 비어있으면 기존의 장르를 넣어준다, 비어있지 않으면 선택한 값을 넣어준다.
+    savelog: user.saveLogin
+  }));
+
+  // localStorage.clear();
+
   // 이름 수정시켜준다.
   // fetch주소 로그인 id로 수정시켜주기
   const modiNameRes = await fetch(`/users/${user.id}`, {
@@ -130,9 +166,6 @@ $modiIfBt.onclick = async e => {
       headers: { 'content-Type': 'application/json' },
       body: JSON.stringify({name : `${$modiIfName.value}`})
   });
-  
-  // 장르를 수정해준다.
-  const index = $preference.selectedIndex;
 
   if(index > 0) {
     const modiGenRes = await fetch(`/users/${user.id}`, {
@@ -150,11 +183,13 @@ $modiIfBt.onclick = async e => {
   $completedMessage.textContent = '수정이 완료되었습니다.'
 };
 
-// 취소하기 버튼 클릭스 메인으로 넘어간다.
+// 취소하기 버튼 클릭시 이전 페이지로 넘어간다.
 $cancle.onclick = () => {
-  window.location.href = '/html/main.html';
+  window.history.go(-1);
 };
 
-$modiIfCurPw.onfocus = () => {
-  $message.classList.add('active');
-};
+[...$pws].forEach(pw => {
+  pw.onfocus = () => {
+    $message.classList.add('active');
+  }
+});

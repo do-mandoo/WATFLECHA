@@ -21,7 +21,7 @@ $signUpForm.onsubmit = async e => {
   });
 
   // 입력하려는 아이디와 서버에있는 아이디 비교
-  const res = await fetch('http://localhost:3000/users');
+  const res = await fetch('/users');
   const users = await res.json();
 
   // 만약 값이 있으면 length가 양수, 없으면 0
@@ -71,7 +71,7 @@ $signUpForm.onsubmit = async e => {
     signUp[pair[0]] = pair[1];
   }
 
-  fetch('http://localhost:3000/users', {
+  fetch('/users', {
     method:'POST',
     headers: { 'content-Type': 'application/json' },
     body: JSON.stringify(signUp)
@@ -79,5 +79,5 @@ $signUpForm.onsubmit = async e => {
 
   // 회원가입이 원활이 된경우
   // 메인화면으로 넘어간다.
-  location.href = 'http://localhost:3000/html/main.html';
+  location.href = '/';
 };
