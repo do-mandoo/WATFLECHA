@@ -60,7 +60,7 @@ const modifyBookMarks = async () => {
     });
     const { bookmarks } = await patchLi.json();
     getBookmarks = bookmarks;
-    $popupVideo.innerHTML = "";
+    $popupVigideo.innerHTML = "";
   } catch (err) {
     console.log("[ERROR]", err);
   }
@@ -126,12 +126,13 @@ $likeBtn.onclick = async (e) => {
     $heartPopup.style.opacity = "1";
     $heartPopup.style.zIndex = "300";
     $heartPopup.style.display = "block";
-
+    $heartPopup.classList.add("showing");
     setTimeout(() => {
       $heartPopup.style.opacity = "0";
       $heartPopup.style.display = "none";
       $heartPopup.style.transition = "none";
       $heartPopup.style.zIndex = "-300";
+      $heartPopup.classList.remove("showing");
     }, 1000);
   } else {
     $likeBtn.firstElementChild.innerHTML = "찜하기";

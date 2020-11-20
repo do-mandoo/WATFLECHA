@@ -158,7 +158,7 @@ $topBtn.onclick = () => {
 };
 
 // 로그아웃
-$logOut.onclick = e => {
+$logOut.onclick = (e) => {
   localStorage.setItem(
     "login",
     JSON.stringify({
@@ -166,7 +166,7 @@ $logOut.onclick = e => {
       name: localUser.name,
       genre: localUser.genre,
       savelog: localUser.savelog,
-      curlog: false
+      curlog: false,
     })
   );
 };

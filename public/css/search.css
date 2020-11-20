@@ -108,7 +108,7 @@ a.logout-btn:hover {
   position: relative;
 }
 
-.popup__video>img {
+.popup__video > img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -281,7 +281,7 @@ h3.popup__open__overviewTag {
   border: 2px solid crimson;
 }
 
-.search-btn>span {
+.search-btn > span {
   margin-left: 10px;
 }
 
@@ -290,7 +290,7 @@ h3.popup__open__overviewTag {
   padding: 0 100px;
 }
 
-.main>h1 {
+.main > h1 {
   color: #fff;
   margin: 50px auto;
 }
@@ -308,7 +308,7 @@ h3.popup__open__overviewTag {
   align-content: center;
 }
 
-.result__movies>li {
+.result__movies > li {
   text-align: center;
   width: 18%;
   margin-right: 25px;
@@ -316,17 +316,17 @@ h3.popup__open__overviewTag {
   line-height: 50px;
 }
 
-.result__movies>li:last-child {
+.result__movies > li:last-child {
   margin-right: 0;
 }
 
-.result__movies>li:hover {
+.result__movies > li:hover {
   transform: scale(1.15);
   transition: all 0.3s ease-in-out;
   background-color: #000;
 }
 
-.result__movies>li>a {
+.result__movies > li > a {
   display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -335,8 +335,19 @@ h3.popup__open__overviewTag {
   text-decoration: none;
 }
 
-.result__movies>li img {
+.result__movies > li img {
   display: block;
   width: 100%;
   max-height: 350px;
+}
+.heartPopup.showing {
+  animation: showheart 1s;
+}
+@keyframes showheart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

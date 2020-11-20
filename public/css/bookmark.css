@@ -68,7 +68,7 @@ a.logout-btn:hover {
   padding: 0 100px;
 }
 
-.main>h1 {
+.main > h1 {
   color: #fff;
   margin-bottom: 50px;
 }
@@ -81,7 +81,7 @@ a.logout-btn:hover {
   align-content: center;
 }
 
-.main__container__movies>li {
+.main__container__movies > li {
   text-align: center;
   width: 18%;
   margin-right: 25px;
@@ -89,17 +89,17 @@ a.logout-btn:hover {
   line-height: 50px;
 }
 
-.main__container__movies>li:last-child {
+.main__container__movies > li:last-child {
   margin-right: 0;
 }
 
-.main__container__movies>li:hover {
+.main__container__movies > li:hover {
   transform: scale(1.15);
   transition: all 0.3s ease-in-out;
   background-color: #000;
 }
 
-.main__container__movies>li>a {
+.main__container__movies > li > a {
   display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -108,7 +108,7 @@ a.logout-btn:hover {
   text-decoration: none;
 }
 
-.main__container__movies>li img {
+.main__container__movies > li img {
   display: block;
   width: 100%;
   max-height: 350px;
@@ -160,7 +160,7 @@ a.logout-btn:hover {
   position: relative;
 }
 
-.popup__video>img {
+.popup__video > img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -275,7 +275,6 @@ h3.popup__open__overviewTag {
   margin-top: 50px;
 }
 
-
 .top-btn {
   margin: 50px auto;
   position: relative;
@@ -296,4 +295,15 @@ h3.popup__open__overviewTag {
 .top-btn:hover {
   background-color: crimson;
   border: 2px solid crimson;
+}
+.heartPopup.showing {
+  animation: showheart 1s;
+}
+@keyframes showheart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
