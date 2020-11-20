@@ -1,3 +1,28 @@
+const api_key = '173b78669a3a668e66151ca4a6a82176';
+
+const $main__container__movies = document.querySelector('.main');
+const $main__name = document.querySelector('.main__name');
+const $popup = document.querySelector('.popup');
+const $popupOpen = document.querySelector('.popup__open');
+const $openBtn = document.querySelector('.open-btn');
+const $closeBtn = document.querySelector('.close-btn');
+const $likeBtn = document.querySelector('.like-btn');
+const $topBtn = document.querySelector('.top-btn');
+const $popupVideo = document.querySelector('.popup__video');
+const $result__movies = document.querySelector('.result__movies');
+const $popup__movieName = document.querySelector('.popup__movieName');
+const $vote = document.querySelector('.vote');
+const $overview = document.querySelector('.overview');
+const $releaseDate = document.querySelector('.release-date');
+const $genre = document.querySelector('.genre');
+const $actors = document.querySelector('.actors');
+const $runtime = document.querySelector('.runtime');
+const $overlay = document.querySelector('.overlay');
+const $search = document.querySelector('.search-btn-top');
+const $header__logo = document.querySelector('.header__logo');
+const $heartPopup = document.querySelector('.heartPopup');
+
+let selectedId;
 let getBookmarks;
 const localUser = JSON.parse(localStorage.getItem('login'));
 
@@ -39,8 +64,6 @@ const modifyBookMarks = async () => {
   } catch (err) {
     console.log("[ERROR]", err);
   }
-  $likeBtn.classList.remove("liked");
-  $likeBtn.firstElementChild.innerHTML = "찜하기";
 };
 
 // open버튼 클릭 이벤트
@@ -53,8 +76,10 @@ $openBtn.onclick = () => {
   }
 };
 
-$result__movies.onclick = async (e) => {
+// popup창 클릭 이벤트
+$main__container__movies.onclick = async (e) => {
   if (!e.target.matches("li *")) return;
+  if(e.target.parentNode.matches('a')) e.preventDefault();
   selectedId = e.target.parentNode.parentNode.id;
   $popup.style.display = "block";
   $overlay.style.display = "block";
@@ -115,12 +140,10 @@ $likeBtn.onclick = async (e) => {
 
 // close버튼 클릭 이벤트
 $closeBtn.onclick = async (e) => {
-  $popupVideo.innerHTML = null;
   $popup.style.display = "none";
   document.querySelector(".overlay").style.display = "none";
   document.querySelector(".fa-chevron-down").classList.remove("active");
   $popupOpen.style.height = 0;
-  $likeBtn.firstElementChild.innerHTML = "찜완료!";
   modifyBookMarks();
 };
 

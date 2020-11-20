@@ -238,7 +238,6 @@ h3.popup__open__overviewTag {
   font-size: 2rem;
   text-decoration: none;
   outline: none;
-  /* display: none; */
 }
 
 .top-btn:hover {
