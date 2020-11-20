@@ -61,6 +61,7 @@ const modifyBookMarks = async () => {
     });
     const { bookmarks } = await patchLi.json();
     getBookmarks = bookmarks;
+    $popupVideo.innerHTML = "";
   } catch (err) {
     console.log("[ERROR]", err);
   }
