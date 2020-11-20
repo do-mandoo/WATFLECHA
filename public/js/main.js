@@ -1,4 +1,4 @@
-if (!JSON.parse(localStorage.getItem("login")).curlog) {
+if (!localUser.curlog) {
   window.location.href = "../index.html";
 }
 
@@ -158,15 +158,15 @@ $topBtn.onclick = () => {
 };
 
 // 로그아웃
-$logOut.onclick = () => {
+$logOut.onclick = e => {
   localStorage.setItem(
     "login",
     JSON.stringify({
-      id: users.id,
-      name: users.name,
-      genre: users.genre,
-      savelog: saveLogin,
-      curlog: false,
+      id: localUser.id,
+      name: localUser.name,
+      genre: localUser.genre,
+      savelog: localUser.savelog,
+      curlog: false
     })
   );
 };

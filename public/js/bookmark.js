@@ -25,14 +25,11 @@ let selectedId;
 let user = JSON.parse(localStorage.getItem('login'));
 
 // 미 로그인 시 로그인 페이지로 이동
-// if (!JSON.parse(localStorage.getItem("login")).curlog) {
-//   location.assign("/");
-// }
+if (!user.curlog) {
+  location.assign("/");
+}
 
-console.log(1);
 const render = (results) => {
-  console.log(2);
-  // $userName.innerHTML = userName;
   const $li = document.createElement('li');
   $li.id = results.id;
   const $a = document.createElement('a');
@@ -222,7 +219,6 @@ $topBtn.onclick = () => {
 }
 $userName.innerHTML = user.name;
 (async () => {
-  console.log(3);
   try {
     const users = await fetch(`/users/${user.id}`);
     const {bookmarks} = await users.json();
@@ -234,7 +230,6 @@ $userName.innerHTML = user.name;
       const results = await res.json();
       // console.log(results);
       render(results);
-      console.log(4);
     });
   } catch (err) {
     console.log('[ERROR]', err);
@@ -248,8 +243,8 @@ $logoutBtn.onclick = () => {
       id: users.id,
       name: users.name,
       genre: users.genre,
-      savelog: saveLogin,
-      curlog: false,
+      savelog: users.savelog,
+      curlog: false
     })
   );
 };

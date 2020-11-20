@@ -1,4 +1,14 @@
 {
   "users": [
+    {
+      "name": "킹 웅모",
+      "id": "king-ungmo",
+      "pw": "hihi",
+      "genre": "애니메이션",
+      "bookmarks": [
+        "1891",
+        "330459"
+      ]
+    }
   ]
 }
