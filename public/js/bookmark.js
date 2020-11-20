@@ -7,6 +7,7 @@ const $openBtn = document.querySelector('.open-btn');
 const $closeBtn = document.querySelector('.close-btn');
 const $likeBtn = document.querySelector('.like-btn');
 const $topBtn = document.querySelector('.top-btn');
+const $logoutBtn = document.querySelector('.logout-btn');
 const $popupVideo = document.querySelector('.popup__video');
 const $main__container__movies = document.querySelector('.main__container__movies');
 const $popup__movieName = document.querySelector('.popup__movieName');
@@ -24,9 +25,9 @@ let selectedId;
 let user = JSON.parse(localStorage.getItem('login'));
 
 // 미 로그인 시 로그인 페이지로 이동
-if (!JSON.parse(localStorage.getItem("login"))) {
-  location.assign('/');
-};
+// if (!JSON.parse(localStorage.getItem("login")).curlog) {
+//   location.assign("/");
+// }
 
 console.log(1);
 const render = (results) => {
@@ -239,3 +240,16 @@ $userName.innerHTML = user.name;
     console.log('[ERROR]', err);
   }
 })();
+
+$logoutBtn.onclick = () => {
+  localStorage.setItem(
+    "login",
+    JSON.stringify({
+      id: users.id,
+      name: users.name,
+      genre: users.genre,
+      savelog: saveLogin,
+      curlog: false,
+    })
+  );
+};
