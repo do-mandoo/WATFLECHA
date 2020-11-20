@@ -58,9 +58,10 @@ input{
 input:hover{
   caret-color: #fff;
   background-color:#800000;
+  
 }
 
-input[type=submit]:hover{
+input[type=button]:hover{
   cursor: pointer;
   background-color: #ff4500;
   text-decoration: underline;
