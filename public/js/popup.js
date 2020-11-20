@@ -1,3 +1,5 @@
+const api_key = "00d9074f8fdaaf953fcbdf7b73aa351f";
+
 const $main__container__movies = document.querySelector(".main");
 const $popup = document.querySelector(".popup");
 const $popupOpen = document.querySelector(".popup__open");
@@ -15,6 +17,7 @@ const $actors = document.querySelector(".actors");
 const $overlay = document.querySelector(".overlay");
 const $heartPopup = document.querySelector(".heartPopup");
 let selectedId;
+let getBookmarks;
 
 const popup = (movie, actors) => {
   if (selectedId) $popup__movieName.innerHTML = movie.title;
@@ -25,7 +28,33 @@ const popup = (movie, actors) => {
   $genre.innerHTML = movie.genres[0].name;
   $runtime.innerHTML = movie.runtime;
   $actors.innerHTML = actors;
-  if (getBookmarks.indexOf(selectedId) !== -1) $likeBtn.classList.add("liked");
+  if (getBookmarks.indexOf(selectedId) !== -1) {
+    $likeBtn.firstElementChild.innerHTML = `찜완료!`;
+    $likeBtn.classList.add("liked");
+  }
+};
+
+const modifyBookMarks = async () => {
+  const patchBookmarks = $likeBtn.classList.contains("liked")
+    ? getBookmarks
+        .filter((movieId) => movieId !== selectedId)
+        .concat(selectedId)
+    : getBookmarks.filter((movieId) => movieId !== selectedId);
+  try {
+    const patchLi = await fetch(`/users/${localUser.id}`, {
+      method: "PATCH",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify({
+        bookmarks: patchBookmarks,
+      }),
+    });
+    const { bookmarks } = await patchLi.json();
+    getBookmarks = bookmarks;
+  } catch (err) {
+    console.log("[ERROR]", err);
+  }
+  $likeBtn.classList.remove("liked");
+  $likeBtn.firstElementChild.innerHTML = "찜하기";
 };
 
 $openBtn.onclick = () => {
@@ -97,27 +126,7 @@ $closeBtn.onclick = async (e) => {
   document.querySelector(".fa-chevron-down").classList.remove("active");
   $popupOpen.style.height = 0;
   $likeBtn.firstElementChild.innerHTML = "찜완료!";
-
-  const patchBookmarks = $likeBtn.classList.contains("liked")
-    ? getBookmarks
-        .filter((movieId) => movieId !== selectedId)
-        .concat(selectedId)
-    : getBookmarks.filter((movieId) => movieId !== selectedId);
-  console.log(patchBookmarks);
-  try {
-    const patchLi = await fetch(`/users/${localUser.id}`, {
-      method: "PATCH",
-      headers: { "content-Type": "application/json" },
-      body: JSON.stringify({
-        bookmarks: patchBookmarks,
-      }),
-    });
-    const { bookmarks } = await patchLi.json();
-    getBookmarks = bookmarks;
-  } catch (err) {
-    console.log("[ERROR]", err);
-  }
-  $likeBtn.classList.remove("liked");
+  modifyBookMarks();
 };
 
 $overlay.onclick = async () => {
@@ -125,4 +134,11 @@ $overlay.onclick = async () => {
   document.querySelector(".overlay").style.display = "none";
   document.querySelector(".fa-chevron-down").classList.remove("active");
   $popupOpen.style.height = 0;
+  modifyBookMarks();
 };
+
+(async function () {
+  const users = await fetch(`/users/${localUser.id}`);
+  const { bookmarks } = await users.json();
+  getBookmarks = bookmarks ? bookmarks : [];
+})();

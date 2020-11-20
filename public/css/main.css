@@ -42,23 +42,8 @@ body {
 .header__nav li:first-child i {
   color: crimson;
 }
-.header__nav li form {
-  display: inline-block;
-}
-.header__nav #search {
-  width: 18px;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: all 0.3s;
-}
-.header__nav #search input {
-  border-radius: 5px;
-  padding: 5px;
-  margin: 2px 2px 0 2px;
-  outline: none;
-}
-.header__nav #search:hover {
-  width: 202px;
+.header__nav li i {
+  font-size: 20px;
 }
 a.logout-btn {
   font-size: 14px;
@@ -112,9 +97,6 @@ a.logout-btn:hover {
 .main section {
   margin-bottom: 20px;
 }
-.main #top_rated h2 {
-  margin-bottom: 20px;
-}
 /* main */
 .main {
   margin-top: -150px;
@@ -148,7 +130,7 @@ a.logout-btn:hover {
   position: absolute;
   font-size: 82px;
   left: 30px;
-  bottom: 24px;
+  bottom: 50px;
   opacity: 0.9;
   text-shadow: #000 2px 2px 3px;
 }
@@ -171,11 +153,11 @@ a.logout-btn:hover {
 
 .main section button {
   position: absolute;
-  top: 30%;
+  top: 18%;
   color: #fff;
   font-size: 40px;
   outline: none;
-  padding: 20px 5px;
+  padding: 50px 5px 90px;
 }
 .main section .prev {
   left: -30px;
@@ -212,8 +194,7 @@ a.logout-btn:hover {
 .close-btn {
   color: #fff;
   position: absolute;
-  right: 8px;
-  top: -50px;
+  right: -45px;
   background-color: transparent;
   border: none;
   outline: none;

@@ -1,47 +1,42 @@
-const api_key = '173b78669a3a668e66151ca4a6a82176';
+const api_key = "173b78669a3a668e66151ca4a6a82176";
 
-const $searchBar2 = document.getElementById('search-bar2');
-const $searchForm = document.querySelector('.search-form');
-const $result = document.querySelector('.result');
+const $searchBar2 = document.getElementById("search-bar2");
+const $searchForm = document.querySelector(".search-form");
+const $result = document.querySelector(".result");
 
 // local storage
-localStorage.setItem('login', 
+localStorage.setItem(
+  "login",
   JSON.stringify({
-    id: 'Alex123', 
-    name: 'Alex',
-    genre: 'SF'
-  }));
-let user = JSON.parse(localStorage.getItem('login'));
+    id: "Alex123",
+    name: "Alex",
+    genre: "SF",
+  })
+);
+let user = JSON.parse(localStorage.getItem("login"));
 
-
-
-
-
-
-
-
-$searchForm.onsubmit = async e => {
+$searchForm.onsubmit = async (e) => {
   e.preventDefault();
   console.log(e.target);
-  console.log($searchForm.querySelector('input').value);
+  console.log($searchForm.querySelector("input").value);
   // if (e.key !== 'Enter' || !e.target.value) return;
   try {
     // 영화 API로 popup창 개별 정보 가져오기
 
     // const external_id = 'tt12745164';
-    const resMovie = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=ko&query=${$searchBar2.value}&page=1&include_adult=false`);
+    const resMovie = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=ko&query=${$searchBar2.value}&page=1&include_adult=false`
+    );
     const movie = await resMovie.json();
     console.log(movie);
     // const render = (movieId) => {
     //   $result.innerHTML = `<div>${movie.movie_results[0].title}<div>`
-    // } 
+    // }
     // render(movie);
   } catch (err) {
-    console.log('[ERROR]', err);
-  };
-}
-
-
+    console.log("[ERROR]", err);
+  }
+};
 
 // //event handler
 // $search.onclick = () => {
@@ -72,10 +67,9 @@ $searchForm.onsubmit = async e => {
 //   $popupOpen.style.height = 0;
 //   // $likeBtn.classList.add('liked')
 //   $likeBtn.firstElementChild.innerHTML = '찜완료!'
-  
+
 //   const res = await fetch(`/users/${user.id}`);
 //   const {bookmarks : oldbookmarks} = await res.json();
-  
 
 //   // liked 유무에 따른 데이터 db에 반영
 //   if (!$likeBtn.classList.contains('liked')){
@@ -155,14 +149,14 @@ $searchForm.onsubmit = async e => {
 // // popup에서 하트 클릭시 toggle
 // $likeBtn.onclick = e => {
 //   $likeBtn.classList.toggle('liked');
-  
+
 //   if ($likeBtn.classList.contains('liked')){
 //     $likeBtn.firstElementChild.innerHTML = `찜완료!`;
 //     $heartPopup.style.transition = 'all 0.1s';
 //     $heartPopup.style.opacity = '1';
 //     $heartPopup.style.zIndex = '300';
 //     $heartPopup.style.display = 'block';
-    
+
 //     setTimeout(() => {
 //       $heartPopup.style.opacity = '0';
 //       $heartPopup.style.display = 'none';
@@ -199,7 +193,7 @@ $searchForm.onsubmit = async e => {
 //     // 예고편 youtube API
 //     const resVideo = await fetch(`https://api.themoviedb.org/3/movie/${e.target.parentNode.parentNode.id}/videos?api_key=${api_key}`);
 //     const { results } = await resVideo.json();
-//     $popupVideo.innerHTML = `<iframe width="770" height="350" src="https://www.youtube.com/embed/${results[0].key}?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;  
+//     $popupVideo.innerHTML = `<iframe width="770" height="350" src="https://www.youtube.com/embed/${results[0].key}?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 //   } catch (err) {
 //     console.log('[ERROR]', err);
 //   };
@@ -240,7 +234,7 @@ $searchForm.onsubmit = async e => {
 // (async () => {
 //   try {
 //     const users = await fetch(`/users/${user.id}`);
-//     const {name, bookmarks} = await users.json();    
+//     const {name, bookmarks} = await users.json();
 //     bookmarks
 //     .forEach(async movie_id => {
 //       // 이 안에서 get 요청을 할 것
