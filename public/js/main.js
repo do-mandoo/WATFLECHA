@@ -162,10 +162,10 @@ $logOut.onclick = () => {
   localStorage.setItem(
     "login",
     JSON.stringify({
-      id: users.id,
-      name: users.name,
-      genre: users.genre,
-      savelog: saveLogin,
+      id: localUser.id,
+      name: localUser.name,
+      genre: localUser.genre,
+      savelog: localUser.savelog,
       curlog: false,
     })
   );
