@@ -126,7 +126,7 @@ $likeBtn.onclick = async (e) => {
     $heartPopup.style.opacity = "1";
     $heartPopup.style.zIndex = "300";
     $heartPopup.style.display = "block";
-
+    $heartPopup.classList.add("showing");
     setTimeout(() => {
       $heartPopup.style.opacity = "0";
       $heartPopup.style.display = "none";
