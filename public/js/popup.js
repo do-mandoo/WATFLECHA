@@ -132,6 +132,7 @@ $likeBtn.onclick = async (e) => {
       $heartPopup.style.display = "none";
       $heartPopup.style.transition = "none";
       $heartPopup.style.zIndex = "-300";
+      $heartPopup.classList.remove("showing");
     }, 1000);
   } else {
     $likeBtn.firstElementChild.innerHTML = "찜하기";
