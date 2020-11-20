@@ -2,18 +2,18 @@ const $searchBar2 = document.getElementById("search-bar2");
 const $searchForm = document.querySelector(".search-form");
 const $searchFormTop = document.querySelector(".search-form-top");
 const $result = document.querySelector(".result");
+const $logoutBtn = document.querySelector(".logout-btn");
 
 // local storage
 let user = JSON.parse(localStorage.getItem("login"));
 
+// 미 로그인 시 로그인 페이지로 이동
+// if (!JSON.parse(localStorage.getItem("login")).curlog) {
+//   location.assign("/");
+// }
+
 // localstorage에 있는 이름을 화면에 렌더링
 $main__name.innerHTML = user.name;
-
-// 미 로그인 시 로그인 페이지로 이동
-if (!JSON.parse(localStorage.getItem("login"))) {
-  location.assign("/");
-}
-
 //event handler
 
 // 스크롤 이벤트
@@ -61,4 +61,18 @@ const render = async () => {
   } catch (err) {
     console.log("[ERROR]", err);
   }
+};
+
+// 로그아웃 버튼
+$logoutBtn.onclick = () => {
+  localStorage.setItem(
+    "login",
+    JSON.stringify({
+      id: users.id,
+      name: users.name,
+      genre: users.genre,
+      savelog: saveLogin,
+      curlog: false,
+    })
+  );
 };
