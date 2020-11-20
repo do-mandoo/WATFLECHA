@@ -58,7 +58,8 @@ $loginButton.onclick = async () => {
       id: users.id,
       name: users.name,
       genre: users.genre,
-      savelog: saveLogin
+      savelog: saveLogin,
+      curlog: true
     }));
 
     localUser = JSON.parse(localStorage.getItem('login'));
