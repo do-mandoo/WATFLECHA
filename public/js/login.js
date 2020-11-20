@@ -15,6 +15,8 @@ let saveLogin;
 
 //보낼때, 아이디랑 비밀번호 중복되는지,
 $loginButton.onclick = async () => {
+  $errorMsgEmptyId.textContent = '';
+  $errorMsgEmptyPw.textContent = '';
   try {
     let errorcount = 0;
     [...$errorMessage].forEach(error => error.classList.remove('active'));
@@ -49,7 +51,7 @@ $loginButton.onclick = async () => {
       ++errorcount;
     }
 
-    if(errorcount>0) return;
+    if(errorcount > 0) return;
     saveLogin = $loginRememberCheck.checked;
     
     //id,pw입력창이 db의 id,pw와 같고 로그인 버튼을 누르면 main으로 이동.

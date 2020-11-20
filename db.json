@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "name": "park",
-      "id": "park",
-      "pw": "123",
-      "genre": "스릴러",
+      "name": "킹 웅모",
+      "id": "king-ungmo",
+      "pw": "hihi",
+      "genre": "애니메이션",
       "bookmarks": [
-        "696374",
-        "38700"
+        "1891",
+        "330459"
       ]
     }
   ]

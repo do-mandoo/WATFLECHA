@@ -8,12 +8,13 @@ const $logoutBtn = document.querySelector(".logout-btn");
 let user = JSON.parse(localStorage.getItem("login"));
 
 // 미 로그인 시 로그인 페이지로 이동
-// if (!JSON.parse(localStorage.getItem("login")).curlog) {
-//   location.assign("/");
-// }
+if (!user.curlog) {
+  window.location.href = '/';
+}
 
 // localstorage에 있는 이름을 화면에 렌더링
 $main__name.innerHTML = user.name;
+
 //event handler
 
 // 스크롤 이벤트
@@ -64,15 +65,15 @@ const render = async () => {
 };
 
 // 로그아웃 버튼
-$logoutBtn.onclick = () => {
+$logoutBtn.onclick = e => {
   localStorage.setItem(
     "login",
     JSON.stringify({
-      id: users.id,
-      name: users.name,
-      genre: users.genre,
-      savelog: saveLogin,
-      curlog: false,
+      id: localUser.id,
+      name: localUser.name,
+      genre: localUser.genre,
+      savelog: localUser.savelog,
+      curlog: false
     })
   );
 };
